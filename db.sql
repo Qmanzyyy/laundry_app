@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2025 at 08:29 AM
+-- Generation Time: Mar 02, 2025 at 03:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -35,6 +35,14 @@ CREATE TABLE `tb_detail_transaksi` (
   `keterangan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tb_detail_transaksi`
+--
+
+INSERT INTO `tb_detail_transaksi` (`id`, `id_transaksi`, `id_paket`, `qty`, `keterangan`) VALUES
+(1, 1, 1, 3, 'Cuci cepat'),
+(2, 2, 2, 1, 'Gunakan pewangi tambahan');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +56,14 @@ CREATE TABLE `tb_member` (
   `jenis_kelamin` enum('L','P') NOT NULL,
   `tlp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_member`
+--
+
+INSERT INTO `tb_member` (`id`, `nama`, `alamat`, `jenis_kelamin`, `tlp`) VALUES
+(1, 'Budi Santoso', 'Jl. Melati No. 12', 'L', '081234567891'),
+(2, 'Siti Aminah', 'Jl. Kenanga No. 34', 'P', '081234567892');
 
 -- --------------------------------------------------------
 
@@ -85,6 +101,14 @@ CREATE TABLE `tb_paket` (
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tb_paket`
+--
+
+INSERT INTO `tb_paket` (`id`, `id_outlet`, `jenis`, `nama_paket`, `harga`) VALUES
+(1, 1, 'kiloan', 'Cuci Reguler', 5000),
+(2, 2, 'selimut', 'Cuci Selimut', 15000);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +130,14 @@ CREATE TABLE `tb_transaksi` (
   `dibayar` enum('dibayar','belum_dibayar') NOT NULL,
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_transaksi`
+--
+
+INSERT INTO `tb_transaksi` (`id`, `id_outlet`, `kode_invoice`, `id_member`, `tgl`, `batas_waktu`, `tgl_bayar`, `biaya_tambahan`, `diskon`, `pajak`, `status`, `dibayar`, `id_user`) VALUES
+(1, 1, 'INV001', 1, '2025-03-01 10:00:00', '2025-03-05 10:00:00', NULL, 0, 0, 1000, 'baru', 'belum_dibayar', 1),
+(2, 2, 'INV002', 2, '2025-03-02 11:00:00', '2025-03-06 11:00:00', '2025-03-03 09:00:00', 2000, 10, 2000, 'selesai', 'dibayar', 2);
 
 -- --------------------------------------------------------
 
@@ -186,13 +218,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_member`
 --
 ALTER TABLE `tb_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_outlet`
@@ -204,13 +236,13 @@ ALTER TABLE `tb_outlet`
 -- AUTO_INCREMENT for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
