@@ -3,7 +3,7 @@
 // koneksi database
   require_once './../config/db.php';
 
-// function dari sebuah login form php
+// login handler
   require_once './partials/function/loginHandler.php';
 ?>
 
@@ -13,7 +13,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-
+<!-- ======= favicon ======== -->
+  <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
   <link rel="stylesheet" href="./../style/main.css" />
 

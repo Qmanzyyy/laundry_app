@@ -1,20 +1,12 @@
 <?php 
 session_start();
 
-// Cek apakah user sudah login
-    if (!isset($_SESSION['user_id'])) {
-        // Jika belum akan redirect ke halaman login
-        header("Location: ./pages/login.php");
-        exit;
-    }
+// cek apakah sudah login atau belum
+    include_once './pages/partials/function/loginChecker.php';
 
 // Cek role
-    if ($_SESSION['user_role'] === 'admin' || $_SESSION['user_role'] === 'owner') {
+    if ($_SESSION['user_role'] === 'admin' || $_SESSION['user_role'] === 'owner' || $_SESSION['user_role'] === 'kasir') {
         // Arahkan ke dashboard
         header("Location: ./pages/dashboard.php");
-        exit;
-    } else {
-        // Selain admin/owner ke kasir
-        header("Location: ./page/kasir.php");
         exit;
     }

@@ -9,11 +9,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Cek role
-if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner'&& $_SESSION['user_role'] !== 'kasir'){
-    // Arahkan ke login jika role tidak sesuai
-    header("Location: ./login.php");
-    exit;
-}
+// if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner'&& $_SESSION['user_role'] !== 'kasir'){
+//     // Arahkan ke login jika role tidak sesuai
+//     header("Location: ./login.php");
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +21,30 @@ if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner'&& $
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kasir</title>
+<!-- ======= favicon ======== -->
+    <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
+<!-- ======= koneksi css ======= -->
+    <link rel="stylesheet" href="./../style/main.css" />
 </head>
-<body>
-    ini kasir
-    <a href="./logout.php">logout</a>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- ======== Wrapper utama: sidebar + konten ======== -->
+  <div class="flex h-screen">
+
+    <!-- ======== sidebar ======== -->
+    <?php include './partials/sidebar.php';?>
+    
+    <!-- ======== MAIN CONTENT (Navbar + Content) ======== -->
+    <div class="flex-1 flex flex-col">
+        <!-- ======== Navbar ======== -->
+        <?php include './partials/navbar.php';?>
+
+        <!-- ======== Main Content ======== -->
+        <?php include './partials/mainDashboard.php';?>
+     </div>
+
+    </div>
+  <!-- ======== Sidebar Function ======= -->
+  <script src="./partials/js/sidebarToggle.js"></script>
 </body>
 </html>

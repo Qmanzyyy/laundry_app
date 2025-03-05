@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
         if ($result && mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
             // Menggunakan password_verify() untuk mencocokkan password yang di-hash
-            if (password_verify($password, $row["password"])) {
+            if ($password == $row["password"]) {
                 $_SESSION['user_id'] = $row["id"];
                 $_SESSION['user_role'] = $row["role"];
                 header("Location: ./../index.php");

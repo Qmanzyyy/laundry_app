@@ -9,10 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Cek role
-if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner') {
-    header("Location: ./login.php");
-    exit;
-}
+// if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner') {
+//     header("Location: ./kasir.php");
+//     exit;
+// }
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,14 @@ if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <?php if ($_SESSION['user_role'] === 'admin' || $_SESSION['user_role'] === 'owner'){
+      echo '<title>Dashboard</title>';
+    } else {
+      echo '<title>Kasir</title>';
+      }?>
+<!-- ======= favicon ======== -->
+    <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
+<!-- ======= koneksi css ======= -->
     <link rel="stylesheet" href="./../style/main.css" />
 </head>
 <body class="bg-gray-100 text-gray-800">
