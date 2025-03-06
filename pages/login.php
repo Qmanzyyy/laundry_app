@@ -4,7 +4,7 @@
   require_once './../config/db.php';
 
 // login handler
-  require_once './partials/function/loginHandler.php';
+  require_once './components/function/loginHandler.php';
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +60,6 @@
   </form>
 
 <!-- ======== hide/show password ======== -->
-  <script src="./partials/js/loginToggle.js"></script>
+  <script src="./components/js/loginToggle.js"></script>
 </body>
 </html>

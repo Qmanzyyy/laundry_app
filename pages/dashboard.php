@@ -7,13 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ./login.php");
     exit;
 }
-
-// Cek role
-// if ($_SESSION['user_role'] !== 'admin' && $_SESSION['user_role'] !== 'owner') {
-//     header("Location: ./kasir.php");
-//     exit;
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,19 +29,22 @@ if (!isset($_SESSION['user_id'])) {
   <div class="flex h-screen">
 
     <!-- ======== sidebar ======== -->
-    <?php include './partials/sidebar.php';?>
+    <?php include './components/sidebar.php';?>
     
     <!-- ======== MAIN CONTENT (Navbar + Content) ======== -->
     <div class="flex-1 flex flex-col">
         <!-- ======== Navbar ======== -->
-        <?php include './partials/navbar.php';?>
+        <?php include './components/navbar.php';?>
 
         <!-- ======== Main Content ======== -->
-        <?php include './partials/mainDashboard.php';?>
+        <?php include './components/tabs_routing.php'; ?>
      </div>
 
     </div>
   <!-- ======== Sidebar Function ======= -->
-  <script src="./partials/js/sidebarToggle.js"></script>
+  <script src="./components/js/sidebarToggle.js"></script>
+
+  <!-- ======== tabs ======== -->
+  <script src="./components/js/tabs.js"></script>
 </body>
 </html>

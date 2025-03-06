@@ -16,6 +16,7 @@ if (isset($_POST["submit"])) {
             // Menggunakan password_verify() untuk mencocokkan password yang di-hash
             if ($password == $row["password"]) {
                 $_SESSION['user_id'] = $row["id"];
+                $_SESSION['user_name'] = $row["nama"];
                 $_SESSION['user_role'] = $row["role"];
                 header("Location: ./../index.php");
                 exit;

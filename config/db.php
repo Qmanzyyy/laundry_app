@@ -14,4 +14,15 @@
     // }else{
     //     echo "koneksi berhasil";
     // }
-?>
+
+// function query
+    function query($query){
+        global $conn;
+        $result = mysqli_query($conn,$query);
+        $rows = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        };
+        // mengembalikan data ke dalam $rows
+        return $rows;
+    };
