@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
 <!-- ======= favicon ======== -->
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-    <link rel="stylesheet" href="./../style/main.css" />
+    <link rel="stylesheet" href="./../style/tailwind.css" />
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -38,9 +38,7 @@ if (!isset($_SESSION['user_id'])) {
         <?php include './components/navbar.php';?>
 
         <!-- ======== Main Content ======== -->
-         <div class="flex justify-center items-center">
            <?php include './components/tabs_routing.php'; ?>
-         </div>
      </div>
 
     </div>

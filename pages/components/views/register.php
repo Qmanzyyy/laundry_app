@@ -1,15 +1,10 @@
-<main>
-    <h1 class="text-6xl">my brain is not braining</h1>
-<!-- <div>
-    <form action="./function/registerProccess.php" method="post">
-        <h1>register</h1>
-        <label for="nama">nama</label>
-        <input class="border" type="text" name="nama" id="nama" required>
-        <label for="alamat">alamat</label>
-        <input class="border" type="text" name="alamat" id="alamat" required>
-        <label for="no telp">no telp</label>
-        <input class="border" type="number" name="tlp" id="no telp" required>
-        <button type="submit" class="border">kirim</button>
-    </form>
-</div> -->
+<?php if ($_SESSION['user_role'] === 'owner'):?>
+<main class="flex items-center justify-center bg-gray-100 p-6">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+        <h1 class="text-2xl font-semibold text-gray-800">Create a New Account</h1>
+        <hr class="my-4 border-gray-300">
+        <p class="text-gray-600">Create a New Account For Your New Employee</p>
+        <a href="register.php" class="mt-6 inline-block bg-blue-600 text-white py-2 px-6 rounded-lg shadow hover:bg-blue-700 transition">Register Now</a>
+    </div>
 </main>
+<?php endif;?>

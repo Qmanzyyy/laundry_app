@@ -19,4 +19,19 @@ USE laundry;
 ```bash
 bisa dengan copy file db.sql lalu paste bisa juga dengan import menggunakan gui dari phpmyadmin
 ```
-3. selamat aplikasi anda berjalan dengan baik harusnya
+3. selamat aplikasi anda berjalan dengan baik, harusnya
+
+## 🗒️Note
+```bash
+1.  username : miftahur
+    password : miftahur123
+    role     : owner
+
+2.  username : riezky
+    password : riezky123
+    role     : kasir
+
+3.  username : danendra
+    password : danendra123
+    role     : admin
+```
