@@ -20,7 +20,7 @@
 
 </head>
 <body class="h-screen flex justify-center items-center bg-blue-50">
-  <form action="" method="post" class="bg-white shadow-[0_4px_10px_rgba(33,28,132,1)] rounded-lg border-2 border-[#211C84]">
+  <form action="" method="post" class="md:flex bg-white shadow-[0_4px_10px_rgba(33,28,132,1)] rounded-lg border-2 border-[#211C84]">
     <div class="w-64 p-6 text-center">
       <h1 class="font-bold mb-4 text-[#211C84] text-3xl ">Login</h1>
 
@@ -56,6 +56,11 @@
       <button name="submit" class="active:bg-[#211C84] focus:outline-2 focus:outline-offset-2 focus:outline-violet-500 hover:bg-[#4D55CC] border text-white w-full bg-[#7A73D1] p-2 mt-6 rounded-lg" type="submit">
         Login
       </button>
+    </div>
+    <div class="hidden bg-[#209cee] w-64 md:block">
+      <div class="flex justify-center items-center h-full">
+        <img src="./../img/logo.png" alt="">
+      </div>
     </div>
   </form>
 

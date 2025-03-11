@@ -1,15 +1,22 @@
-# 🚀 Aplikasi PHP Pertama Saya  
+# 🚀 Aplikasi Pengelolaan laundry
 
 ## 📌 Deskripsi  
-Aplikasi Pengelolaan Laundry ini di buat karena tugas sekolah njir 😹
+Aplikasi Pengelolaan Laundry ini di buat karena tugas sekolah saya yang mengharuskan saya membuat aplikasi ini berikut fiturnya
 
 ## ✨ Fitur  
 - 🔥 kasir 
 - 🚀 auto cetak invoice
-- 🎨 entahlah
+- 🎨 realtime stat pemesanan
 
-## 📥 Instalasi  
-yang penting ada aplikasi buat buka php sama sql aja sih gwej pake lampp (xampp linux)😹  
-
+## 📥 Langkah Penggunaan 
+ 
+1. buat database yang bernama laundry
 ```bash
-tinggal ke website xamppnya aja lek
+CREATE DATABASE laundry;
+USE laundry;
+```
+2. lalu import db.sql ke database laundry
+```bash
+bisa dengan copy file db.sql lalu paste bisa juga dengan import menggunakan gui dari phpmyadmin
+```
+3. selamat aplikasi anda berjalan dengan baik harusnya

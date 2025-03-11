@@ -20,6 +20,9 @@ switch ($tab) {
     case 'kasir':
         include 'views/kasir.php';
         break;
+    case 'register':
+        include 'views/register.php';
+        break;
     default:
         include 'views/404.php';
         break;

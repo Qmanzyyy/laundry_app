@@ -1,0 +1,1 @@
+buntu otak ku wak

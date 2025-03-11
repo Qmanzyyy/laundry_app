@@ -1,7 +1,9 @@
-      <!-- NAVBAR -->
+ 
+
+     <!-- NAVBAR -->
       <header class="flex items-center justify-between bg-white h-16 px-4 shadow">
         <!-- Left: Hamburger menu (untuk mobile) -->
-        <button id="menuBtn" class="md:hidden text-blue-900 focus:outline-none">
+        <button id="menuBtn" class="cursor-pointer md:hidden text-blue-900 focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 6h16M4 12h16M4 18h16"></path>
@@ -26,12 +28,7 @@
         <div class="flex items-center space-x-4">
           <span class="text-sm font-semibold"><?= $_SESSION['user_name'];?></span>
           <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
-                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.121 17.804A13.966 13.966 
-                       0 0112 15c2.574 0 4.969.652 6.879 1.804M15 
-                       10a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
+            <img class="rounded-full" src="<?= htmlspecialchars($photo); ?>" alt="Profile Photo">
           </div>
         </div>
       </header>

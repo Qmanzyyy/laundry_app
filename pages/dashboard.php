@@ -1,6 +1,7 @@
 <?php 
 session_start();
 
+include_once './components/function/randomProfile.php';
 // Cek apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
     // Jika belum akan redirect ke halaman login
@@ -37,7 +38,9 @@ if (!isset($_SESSION['user_id'])) {
         <?php include './components/navbar.php';?>
 
         <!-- ======== Main Content ======== -->
-        <?php include './components/tabs_routing.php'; ?>
+         <div class="flex justify-center items-center">
+           <?php include './components/tabs_routing.php'; ?>
+         </div>
      </div>
 
     </div>

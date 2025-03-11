@@ -13,12 +13,12 @@ if (isset($_POST["submit"])) {
 
         if ($result && mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            // Menggunakan password_verify() untuk mencocokkan password yang di-hash
             if ($password == $row["password"]) {
                 $_SESSION['user_id'] = $row["id"];
                 $_SESSION['user_name'] = $row["nama"];
                 $_SESSION['user_role'] = $row["role"];
-                header("Location: ./../index.php");
+                $_SESSION['user_photo'] = $row["foto"];
+                header("Location: ./dashboard.php");
                 exit;
             } else {
                 echo "<script>
