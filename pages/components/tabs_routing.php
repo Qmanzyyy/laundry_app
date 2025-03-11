@@ -8,7 +8,10 @@ if ($tab == 'admin' && $_SESSION['user_role'] == 'kasir') {
     include_once 'views/access_denied.php';
     exit();
 }
-
+if ($tab == 'register' && $_SESSION['user_role'] == 'kasir') {
+    include_once 'views/access_denied.php';
+    exit();
+}
 // Routing ke file view berdasarkan tab yang diminta
 switch ($tab) {
     case 'home':

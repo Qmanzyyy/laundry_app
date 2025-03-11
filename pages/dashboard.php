@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
 <!-- ======= favicon ======== -->
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-    <link rel="stylesheet" href="./../style/tailwind.css" />
+    <link rel="stylesheet" href="./../style/style.css" />
 </head>
 <body class="bg-gray-100 text-gray-800">
 
