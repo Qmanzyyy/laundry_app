@@ -19,7 +19,10 @@ USE laundry;
 ```bash
 bisa dengan copy file db.sql lalu paste bisa juga dengan import menggunakan gui dari phpmyadmin
 ```
-3. selamat aplikasi anda berjalan dengan baik, harusnya
+3. ingin membuild stylenya bisa menggunakan
+```bash
+npm run dev
+```
 
 ## 🗒️Note
 ```bash
