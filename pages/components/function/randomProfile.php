@@ -8,7 +8,7 @@ $default_images = [
 ];
 
 // Jika foto user kosong, pilih foto default secara acak
-if (empty($_SESSION['user_photo'])) {
+if ($_SESSION['user_photo'] === "default.png" || $_SESSION['user_photo'] === "") {
     $random_index = array_rand($default_images);
     $photo = $default_images[$random_index];
 } else {

@@ -1,0 +1,123 @@
+<?php 
+
+// Menghubungkan ke database
+require './../config/db.php';
+
+// Jika tombol submit ditekan
+require_once "./components/function/registerProccess.php";
+$outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
+?>
+
+<main class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div class="bg-white shadow-xl rounded-2xl p-8">
+      <h2 class="text-center text-2xl font-bold text-blue-700 mb-6">Tambahkan Akun</h2>
+      <form action="" method="post" enctype="multipart/form-data" class="space-y-5">
+        
+        <!-- Nama -->
+        <div>
+          <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+          <input id="nama" name="nama" type="text" required placeholder="Masukkan Nama" 
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 
+                        focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        
+        <!-- Username -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input id="username" name="username" type="text" required placeholder="Masukkan Username" 
+                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 
+                        focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        
+        <!-- Password -->
+        <div>
+          <label for="password" class="text-sm font-medium text-gray-700">Password</label>
+          <div class="flex items-center">
+            <input id="password" name="password" type="password" required placeholder="Masukkan Password" 
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 
+                          focus:ring-blue-500 focus:border-blue-500">
+            <img id="eyeicon" class="w-5 m-2 cursor-pointer" src="./../img/eye-close.png" alt="">
+          </div>
+        </div>
+        
+        <!-- Role -->
+        <div>
+          <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+          <select id="role" name="role" required 
+                  class="mt-1 block w-full border border-gray-300 bg-white rounded-md shadow-sm py-2 px-3 
+                         focus:ring-blue-500 focus:border-blue-500">
+            <option value="kasir">Kasir</option>
+            <option value="petugas">petugas</option>
+            <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
+          </select>
+        </div>
+        
+        <!-- Foto Profil -->
+        <div>
+          <label for="photo" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+          <input id="photo" type="file" name="foto" accept="image/*" 
+                 class="mt-1 block w-full text-sm text-gray-500 
+                        file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm 
+                        file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+        </div>
+        
+        <!-- Outlet -->
+        <div>
+          <label for="outlet" class="block text-sm font-medium text-gray-700">Outlet</label>
+          <select id="outlet" name="outlet" required 
+                  class="mt-1 block w-full border border-gray-300 bg-white rounded-md shadow-sm py-2 px-3 
+                         focus:ring-blue-500 focus:border-blue-500">
+            <?php foreach ($outlet as $otl): ?>
+              <option value="<?= $otl["id"] ?>"><?= $otl["nama"] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" name="submit" 
+                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm 
+                         text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 
+                         focus:ring-offset-2 focus:ring-blue-500">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="./components/js/loginToggle.js"></script>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+if ($result) {
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'User berhasil ditambahkan!',
+                icon: 'success'
+            }).then(() => {
+                window.location.href = './dashboard.php?tab=registerAkun';
+            });
+        </script>";
+    } else {
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Gagal menambahkan user!',
+                icon: 'error'
+            });
+        </script>";
+    }

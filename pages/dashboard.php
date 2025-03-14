@@ -22,12 +22,12 @@ if (!isset($_SESSION['user_id'])) {
 <!-- ======= favicon ======== -->
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-    <link rel="stylesheet" href="./../style/style.css" />
+    <link rel="stylesheet" href="./../style/tuah.css" />
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-200 text-gray-800 relative ">
 
   <!-- ======== Wrapper utama: sidebar + konten ======== -->
-  <div class="flex h-screen">
+  <div class="flex min-h-screen">
 
     <!-- ======== sidebar ======== -->
     <?php include './components/sidebar.php';?>
@@ -36,16 +36,13 @@ if (!isset($_SESSION['user_id'])) {
     <div class="flex-1 flex flex-col">
         <!-- ======== Navbar ======== -->
         <?php include './components/navbar.php';?>
-
-        <!-- ======== Main Content ======== -->
-           <?php include './components/tabs_routing.php'; ?>
+          <!-- ======== Main Content ======== -->
+             <?php include './components/tabs_routing.php'; ?>
      </div>
 
     </div>
   <!-- ======== Sidebar Function ======= -->
   <script src="./components/js/sidebarToggle.js"></script>
 
-  <!-- ======== tabs ======== -->
-  <script src="./components/js/tabs.js"></script>
 </body>
 </html>

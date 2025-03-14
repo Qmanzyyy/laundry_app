@@ -27,11 +27,15 @@ bisa dengan copy file db.sql lalu paste bisa juga dengan import menggunakan gui 
     password : miftahur123
     role     : owner
 
-2.  username : riezky
+2.  username : danendra
+    password : danendra123
+    role     : admin
+
+3.  username : riezky
     password : riezky123
     role     : kasir
 
-3.  username : danendra
-    password : danendra123
-    role     : admin
+4.  username : akbar
+    password : akbar123
+    role     : petugas
 ```

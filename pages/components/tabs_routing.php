@@ -23,8 +23,17 @@ switch ($tab) {
     case 'kasir':
         include 'views/kasir.php';
         break;
-    case 'register':
-        include 'views/register.php';
+    case 'registerAkun':
+        include 'views/registerAkun.php';
+        break;
+    case 'tambahOutlet':
+        include 'views/tambahOutlet.php';
+        break;
+    case 'kelolaUser':
+        include 'views/kelolaUser.php';
+        break;
+    case 'editUser':
+        include 'views/editUser.php';
         break;
     default:
         include 'views/404.php';

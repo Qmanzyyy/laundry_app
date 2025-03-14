@@ -1,28 +1,38 @@
 <?php
-// variabel mysqli_connect 
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "laundry";
+// Konfigurasi koneksi database
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "laundry";
 
-// koneksi ke database
-    $conn = mysqli_connect($host,$username,$password,$db);
+// Membuat koneksi
+$conn = mysqli_connect($host, $username, $password, $db);
 
-// test apakah databse terkoneksi atau tidak
-    // if ($conn->connect_error){
-    //     die("koneksi gagal;". $conn->connect_error);
-    // }else{
-    //     echo "koneksi berhasil";
-    // }
+// Cek koneksi
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
 
-// function query
-    function query($query){
-        global $conn;
-        $result = mysqli_query($conn,$query);
-        $rows = [];
-        while($row = mysqli_fetch_assoc($result)){
-            $rows[] = $row;
-        };
-        // mengembalikan data ke dalam $rows
-        return $rows;
-    };
+// Fungsi untuk menjalankan query dan mengembalikan hasilnya
+function query($query) {
+    global $conn;
+    
+    if (!$conn) {
+        die("Koneksi database tidak tersedia.");
+    }
+
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        die("Error dalam query: " . mysqli_error($conn));
+    }
+
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+
+// Tidak ada `mysqli_close($conn);` agar koneksi tetap bisa digunakan selama aplikasi berjalan
+?>

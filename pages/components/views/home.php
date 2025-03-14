@@ -1,4 +1,4 @@
-<main class="p-6">
+<main class="md:p-6 px-6 pt-24 ">
     <div class="bg-white p-6 rounded-lg shadow">
         <div class="flex items-center space-x-4">
             <div class="p-3  text-white rounded-full">
