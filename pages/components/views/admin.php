@@ -40,7 +40,7 @@ $totaltransaksi = $transaksi[0]['total'];
             'admin'  => ['color' => 'bg-blue-500', 'icon' => '🛠️'],
             'kasir'  => ['color' => 'bg-yellow-500', 'icon' => '💰'],
             'owner'  => ['color' => 'bg-red-500', 'icon' => '👑'],
-            'member' => ['color' => 'bg-green-500', 'icon' => '🙋']
+            'petugas' => ['color' => 'bg-green-500', 'icon' => '🙋']
         ];
 
         foreach ($usersByRole as $role) : 

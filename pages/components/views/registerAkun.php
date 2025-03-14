@@ -9,7 +9,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
 ?>
 <main class="md:p-6 px-6 pt-24 ">
     <div class="bg-white p-6 rounded-lg shadow">
-        <h1 class="text-2xl font-semibold text-gray-800 mb-4">Register Akun Karyawan</h1>
+        <h1 class="text-2xl font-semibold text-gray-800 mb-4">👤Register Akun Karyawan</h1>
         <p class="text-gray-500">Silahkan isi form berikut untuk mendaftarkan akun karyawan baru.</p>
     <form action="" method="post" enctype="multipart/form-data" class="mt-6 space-y-4">
       <!-- Grid Layout -->
@@ -61,11 +61,11 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
 
                   <!-- Foto Profil -->
         <div>
-          <label for="photo" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+          <label for="photo" class="block text-gray-600 font-medium">Foto Profil</label>
           <input id="photo" type="file" name="foto" accept="image/*" 
-                 class="mt-1 block w-full text-sm text-gray-500 
+                 class="block w-full text-sm text-gray-500 
                         file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm 
-                        file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        file:font-semibold file:bg-gray-300 file:text-blue-700 hover:file:text-white hover:file:bg-blue-700">
         </div>
 
           <div>

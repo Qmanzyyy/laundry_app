@@ -7,6 +7,8 @@ $query = "SELECT u.id, u.nama, k.alamat, k.no_telp, k.shift_kerja, u.username, u
           JOIN tb_karyawan k ON u.id = k.id_user";
 
 $users = query($query);
+
+
 ?>
 
 <main class="md:p-6 px-4 md:px-6 pt-24 bg-gray-100 min-h-screen">
@@ -41,7 +43,7 @@ $users = query($query);
                             <td class="py-2 md:py-3 px-4"><?= htmlspecialchars($user['username']) ?></td>
                             <td class="py-2 md:py-3 px-4">
                                 <span class="px-3 py-1 rounded-full text-white text-xs font-semibold
-                                    <?= $user['role'] == 'admin' ? 'bg-cyan-500' : ($user['role'] == 'kasir' ? 'bg-yellow-500' : 'bg-green-500') ?>">
+                                    <?= $user['role'] == 'admin' ? 'bg-blue-500' : ($user['role'] == 'kasir' ? 'bg-yellow-500' : 'bg-green-500') ?>">
                                     <?= htmlspecialchars(ucfirst($user['role'])) ?>
                                 </span>
                             </td>
@@ -86,7 +88,7 @@ $users = query($query);
                 </span>
             </p>
 
-            <div class="flex justify-between mt-4">
+            <div class="flex justify-end mt-4">
                 <button onclick="openEditModal(this)"
                     data-id="<?= $user['id'] ?>" 
                     data-nama="<?= htmlspecialchars($user['nama']) ?>" 
@@ -99,11 +101,11 @@ $users = query($query);
                     Edit
                 </button>
 
-                <a href="?page=deleteUser&id=<?= $user['id'] ?>" 
+                <button href="?page=deleteUser&id=<?= $user['id'] ?>" 
                     onclick="return confirm('Apakah Anda yakin ingin menghapus karyawan ini?')"
                     class="bg-red-500 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-red-700 transition">
                     Hapus
-                </a>
+                </button>
             </div>
         </div>
     <?php endforeach; ?>
