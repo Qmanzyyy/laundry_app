@@ -39,49 +39,35 @@ if (isset($_POST['submit'])) {
         </script>";
         exit; // Hentikan proses jika username sudah ada
     }
-    mysqli_stmt_close($stmt_check); // Tutup statement pengecekan
+    mysqli_stmt_close($stmt_check);
 
-    // ✅ **Proses upload foto jika ada**
-    if (!empty($_FILES["foto"]["name"])) {
-        $target_dir = "./profilesPicture/";
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-        $max_size = 3 * 1024 * 1024; // 3MB
-        $max_width = 3840;
-        $max_height = 2160;
-
-        $file_info = pathinfo($_FILES["foto"]["name"]);
-        $file_ext = strtolower($file_info['extension']);
-        $foto = time() . "_" . bin2hex(random_bytes(5)) . "." . $file_ext;
-        $target_file = $target_dir . $foto;
-
-        if (!is_dir($target_dir)) {
-            mkdir($target_dir, 0777, true);
+    // ✅ **Proses upload foto jika ada cropped image (Base64)**
+    if (!empty($_POST['cropped_image'])) {
+        $cropped_image = $_POST['cropped_image'];
+        
+        // Validasi format Base64
+        $image_parts = explode(";base64,", $cropped_image);
+        if (count($image_parts) !== 2) {
+            die("Format gambar tidak valid.");
         }
 
-        if (!is_writable($target_dir)) {
-            die("Folder tujuan tidak memiliki izin tulis. Coba jalankan: <code>chmod 777 profilesPicture</code>");
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = strtolower($image_type_aux[1]);
+        $allowed_types = ['jpeg', 'jpg', 'png', 'gif'];
+
+        if (!in_array($image_type, $allowed_types)) {
+            die("Format gambar harus JPG, PNG, atau GIF.");
         }
 
-        $file_mime = mime_content_type($_FILES["foto"]["tmp_name"]);
-        $valid_mime = ['image/jpeg', 'image/png', 'image/gif'];
-        if (!in_array($file_mime, $valid_mime)) {
-            die("Format file tidak diizinkan: " . $file_mime);
-        }
+        // Decode Base64 menjadi file gambar
+        $image_base64 = base64_decode($image_parts[1]);
+        $foto = time() . "_" . bin2hex(random_bytes(5)) . "." . $image_type;
+        $file_path = "./profilesPicture/" . $foto;
 
-        if ($_FILES["foto"]["size"] > $max_size) {
-            die("Ukuran file terlalu besar! Maks 3MB.");
+        // Simpan gambar ke folder
+        if (!file_put_contents($file_path, $image_base64)) {
+            die("Gagal menyimpan gambar.");
         }
-
-        list($width, $height) = getimagesize($_FILES["foto"]["tmp_name"]);
-        if ($width > $max_width || $height > $max_height) {
-            die("Resolusi gambar terlalu besar! Maks 3840x2160.");
-        }
-
-        if (!move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
-            die("Gagal memindahkan file. Cek izin folder dan pastikan direktori ada.");
-        }
-
-        $foto = $target_file; // Update nama file foto yang diupload
     }
 
     // ✅ **Mulai transaksi database**

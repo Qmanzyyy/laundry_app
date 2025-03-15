@@ -3,12 +3,26 @@
 // Tentukan default tab
 $tab = isset($_GET['tab']) ? $_GET['tab'] : 'home';
 
-// Cek hak akses terlebih dahulu untuk tab admin
+// cek role user kasir di setiap tab
 if ($tab == 'admin' && $_SESSION['user_role'] == 'kasir') {
     include_once 'views/access_denied.php';
     exit();
+}elseif ($tab == 'register' && $_SESSION['user_role'] == 'kasir') {
+    include_once 'views/access_denied.php';
+    exit();
+}elseif($tab == 'kelolaUser' && $_SESSION['user_role'] == 'kasir'){
+    include_once 'views/access_denied.php';
+    exit();
+}elseif($tab == 'registrasiAkun' && $_SESSION['user_role'] == 'kasir'){
+    include_once 'views/access_denied.php';
+    exit();
+}elseif($tab == 'tambahOutlet' && $_SESSION['user_role'] == 'kasir'){
+    include_once 'views/access_denied.php';
+    exit();
 }
-if ($tab == 'register' && $_SESSION['user_role'] == 'kasir') {
+
+// Cek role user admin di setiap tab
+if ($tab == 'tambahOutlet' && $_SESSION['user_role'] == 'admin') {
     include_once 'views/access_denied.php';
     exit();
 }
@@ -31,9 +45,6 @@ switch ($tab) {
         break;
     case 'kelolaUser':
         include 'views/kelolaUser.php';
-        break;
-    case 'editUser':
-        include 'views/editUser.php';
         break;
     default:
         include 'views/404.php';

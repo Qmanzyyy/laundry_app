@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tailwindcss -i ./style/input.css -o ./style/output.css --watch"
+    "dev": "tailwindcss -i ./style/input.css -o ./style/mian.css --watch"
   },
   "repository": {
     "type": "git",

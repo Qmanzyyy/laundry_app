@@ -39,7 +39,7 @@
               </a>
             </li>
             <?php endif;?>
-            <?php if ($_SESSION['user_role'] === 'owner'):?>
+            <?php if ($_SESSION['user_role'] === 'owner' || $_SESSION['user_role'] == 'admin'):?>
             <li>
               <a href="?tab=registerAkun" class="flex items-center p-2 rounded hover:bg-blue-800">
                 <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
               </a>
             </li>
             <?php endif;?>
-            <?php if ($_SESSION['user_role'] === 'owner'):?>
+            <?php if ($_SESSION['user_role'] === 'owner' || $_SESSION['user_role'] == 'admin'):?>
             <li>
               <a href="?tab=kelolaUser" class="flex items-center p-2 rounded hover:bg-blue-800">
                 <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

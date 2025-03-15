@@ -16,7 +16,7 @@
 <!-- ======= favicon ======== -->
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/output.css" />
+  <link rel="stylesheet" href="./../style/mian.css" />
 
 </head>
 <body class="h-screen flex justify-center items-center">
