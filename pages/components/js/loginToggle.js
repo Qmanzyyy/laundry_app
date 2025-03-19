@@ -1,7 +1,7 @@
-let eyeicon = document.getElementById("eyeicon");
-let password = document.getElementById("password");
+const eyeicon = document.getElementById("eyeicon");
+const password = document.getElementById("password");
 
-eyeicon.onclick = function () {
+function look () {
   if (password.type == "password") {
     password.type = "text";
     eyeicon.src = "./../img/eye-open.png";
@@ -10,3 +10,5 @@ eyeicon.onclick = function () {
     eyeicon.src = "./../img/eye-close.png";
   }
 };
+
+eyeicon.addEventListener("click", look);

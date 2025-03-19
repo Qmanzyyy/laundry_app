@@ -43,7 +43,8 @@ try {
     ob_clean();
     echo "Success: Data karyawan berhasil dihapus.";
 } catch (Exception $e) {
-    $conn->rollback();
+    $conn->rollback(); 
+    
     ob_clean();
     error_log("deleteUser.php: Exception ditangkap: " . $e->getMessage());
     echo "Error: Terjadi kesalahan: " . $e->getMessage();

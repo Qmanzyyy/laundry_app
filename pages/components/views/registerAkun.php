@@ -1,16 +1,12 @@
 <?php 
-
-// Menghubungkan ke database
-require './../config/db.php';
-
 // Jika tombol submit ditekan
 require_once "./components/function/registerProccess.php";
 $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
 ?>
 <main class="md:p-8 px-6 pt-24">
     <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">👤 Register Akun Karyawan</h1>
-        <p class="text-gray-500 text-center mb-6">Silakan isi form berikut untuk mendaftarkan akun karyawan baru.</p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Register Akun Karyawan</h1>
+        <p class="text-gray-500 text-center mb-6 md:text-base text-sm">Silakan isi form berikut untuk mendaftarkan akun karyawan baru.</p>
     
         <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -27,13 +23,14 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
                     </div>
                     <div>
                         <label for="tlp" class="block text-gray-600 font-semibold">Telepon</label>
-                        <input type="text" name="tlp" id="tlp" required 
+                        <input type="tel" pattern="^(?:\+62|62|08)\d{8,11}$" title="Masukkan nomor telepon dengan format +62, 62, atau 08 diikuti 8-11 digit angka." name="tlp" id="tlp" required minlength="9" 
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
                     </div>
                     <div>
                         <label for="shift" class="block text-gray-600 font-semibold">Shift</label>
                         <select name="shift" id="shift" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
+                            <option disabled selected class="text-gray-500">-- Pilih Shift ---</option>
                             <option value="pagi">Pagi</option>
                             <option value="malam">Malam</option>
                         </select>
@@ -45,26 +42,27 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
                           <input type="text" name="username" id="username" required 
                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
                       </div>
+                      <div class="relative">
                       <label for="password" class="block text-gray-600 font-semibold">Password</label>
-                  <div class="relative">
                       <input type="password" name="password" id="password" required 
                           class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
-                      <img class="w-5 absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer" 
+                      <img class="w-5 absolute top-1/2 translate-y-1 right-3 transform cursor-pointer" 
                           src="./../img/eye-close.png" alt="Toggle Password" id="eyeicon" />
-                  </div>
+                    </div>
 
                   <div>
                         <label for="photo" class="block text-gray-600 font-semibold">Foto Profil</label>
                         <input id="photo" type="file" name="foto" accept="image/*" class="hidden">
-                        <button type="button" id="uploadButton" class="w-full bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition">Pilih Foto</button>
-                        <div id="croppie-container" class="mt-4 hidden"></div>
+                        <div id="croppie-container" class="my-4 hidden"></div>
                         <button type="button" id="cropButton" class="mt-4 bg-black text-white py-2 px-4 rounded-lg hidden hover:bg-gray-800 transition">Crop & Simpan</button>
+                        <button type="button" id="uploadButton" class="w-full bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition">Pilih Foto</button>
                         <input type="hidden" name="cropped_image" id="cropped_image">
                   </div>
                   <div>
-                        <label for="role" class="block text-gray-600 font-semibold">Role</label>
+                        <label for="role" class="block text-gray-600 font-semibold">Level</label>
                         <select name="role" id="role" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
+                            <option disabled selected>-- Pilih Level --</option>
                             <option value="admin">Admin</option>
                             <option value="kasir">Kasir</option>
                             <option value="petugas">Petugas</option>
@@ -90,10 +88,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
         </form>
     </div>
 </main>
-
-
-
-    <script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     var croppieInstance;
     var croppieContainer = document.getElementById("croppie-container");
@@ -140,5 +135,3 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
     });
 });
 </script>
-
-<script src="./components/js/loginToggle.js"></script>

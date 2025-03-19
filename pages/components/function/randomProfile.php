@@ -5,7 +5,7 @@ $default_images = [
     './../img/pp.png'
 ];
 
-// Jika foto user kosong, pilih foto default secara acak
+// Jika foto user kosong, pilih foto default 
 if ($_SESSION['user_photo'] === "default.png" || $_SESSION['user_photo'] === "") {
     $random_index = array_rand($default_images);
     $photo = $default_images[$random_index];

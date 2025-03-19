@@ -21,12 +21,13 @@ bisa dengan copy file db.sql lalu paste bisa juga dengan import menggunakan gui 
 ```
 3. ingin membuild stylenya bisa menggunakan
 ```bash
+npm install tailwindcss @tailwindcss/cli
+npm init -y
 npm run dev
-
-//jika tidak bisa berarti anda belum menginstall npm
-
 ```
-
+4. jika tidak bisa membuild kemungkinan itu dikarenakan belum pasang node js
+    cara pasang node js bisa langsung cek di Youtube atau pergi ke web node js
+    
 ## 🗒️Note
 ```bash
 1.  username : miftahur
