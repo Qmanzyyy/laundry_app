@@ -1,3 +1,4 @@
+<img href="https://github.com/Qmanzyyy/laundry_app/img/owner.png"/>
 # 🚀 Aplikasi Pengelolaan laundry
 
 ## 📌 Deskripsi  
