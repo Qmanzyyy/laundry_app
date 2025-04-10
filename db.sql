@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 14, 2025 at 11:21 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Waktu pembuatan: 10 Apr 2025 pada 05.42
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_detail_transaksi`
+-- Struktur dari tabel `tb_detail_transaksi`
 --
 
 CREATE TABLE `tb_detail_transaksi` (
@@ -38,7 +38,7 @@ CREATE TABLE `tb_detail_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_karyawan`
+-- Struktur dari tabel `tb_karyawan`
 --
 
 CREATE TABLE `tb_karyawan` (
@@ -52,20 +52,10 @@ CREATE TABLE `tb_karyawan` (
   `shift_kerja` enum('pagi','malam') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tb_karyawan`
---
-
-INSERT INTO `tb_karyawan` (`id`, `nama`, `alamat`, `no_telp`, `posisi`, `id_user`, `gaji`, `shift_kerja`) VALUES
-(1, 'Danendra Abhirama', 'Ds.Beber, Kec.Ligung, Kab.Majalengka, Prov.Jawa Barat', '081234567890', 'admin', 23, 3500000.00, 'pagi'),
-(2, 'Akbar Tri Lesmana Sianturi', 'Ds.Jatitengah, Kec,Jatitujuh, Kab.Majalengka, Prov.Jawa Barat', '081234567891', 'petugas', 46, 2500000.00, 'pagi'),
-(5, 'Riezky Chahya Syaputra', 'Ds.Sukamelang Kec.Kertajati Kab.Majalengka Prov.Jawa Barat', '081234567892', 'kasir', 22, 2500000.00, 'pagi'),
-(6, 'Miftahur Rahman', 'Ds.Bantarjati Kec.Kertajati Kab.Majalengka Prov.Jawa Barat', '0812345678903', 'owner', 21, NULL, 'pagi');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_member`
+-- Struktur dari tabel `tb_member`
 --
 
 CREATE TABLE `tb_member` (
@@ -76,18 +66,10 @@ CREATE TABLE `tb_member` (
   `tlp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tb_member`
---
-
-INSERT INTO `tb_member` (`id`, `nama`, `alamat`, `jenis_kelamin`, `tlp`) VALUES
-(1, 'Budi Santoso', 'Jl. Melati No. 12', 'L', '081234567891'),
-(2, 'Siti Aminah', 'Jl. Kenanga No. 34', 'P', '081234567892');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_outlet`
+-- Struktur dari tabel `tb_outlet`
 --
 
 CREATE TABLE `tb_outlet` (
@@ -98,16 +80,16 @@ CREATE TABLE `tb_outlet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tb_outlet`
+-- Dumping data untuk tabel `tb_outlet`
 --
 
 INSERT INTO `tb_outlet` (`id`, `nama`, `alamat`, `tlp`) VALUES
-(22, 'cab pajaten', 'dsn pajaten mas ds bantarjati kec kertajati', '081234567890');
+(1, 'Cab Pajaten', 'DSN Pajaten Mas, DS Bantarjati, KEC Kertajati', '081234567890');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_paket`
+-- Struktur dari tabel `tb_paket`
 --
 
 CREATE TABLE `tb_paket` (
@@ -122,7 +104,7 @@ CREATE TABLE `tb_paket` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_transaksi`
+-- Struktur dari tabel `tb_transaksi`
 --
 
 CREATE TABLE `tb_transaksi` (
@@ -144,7 +126,7 @@ CREATE TABLE `tb_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -158,21 +140,11 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tb_user`
---
-
-INSERT INTO `tb_user` (`id`, `nama`, `foto`, `username`, `password`, `id_outlet`, `role`) VALUES
-(21, 'Miftahur Rahman', '', 'miftahur', '$2y$10$gBJN2YixEVGVc1iyp78UrOesUz9xDn3OZ3MpiX7NgnDxMe86pPLWG', 22, 'owner'),
-(22, 'Riezky Chahya Syaputra', '', 'riezky', '$2y$10$jYEtjtLNy99g1E8WplNc2eHkRtXNUM0SUF4MTd0Ecj8pWp0fc/dTG', 22, 'kasir'),
-(23, 'Danendra Abhirama', '', 'danendra', '$2y$10$0Kuel2xCsQPpnx0K4hV1uuDET8hNVXbj/MmO2ehB5.KuwpiwUgUc.', 22, 'admin'),
-(46, 'Akbar Tri Lesmana Sianturi', 'default.png', 'akbar', '$2y$10$1UDYhIJBxG.mh57OYKjNVesWxxvrQgf5nTamNrsKeGgork/i1qUae', 22, 'petugas');
-
---
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tb_detail_transaksi`
+-- Indeks untuk tabel `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
   ADD PRIMARY KEY (`id`),
@@ -180,33 +152,33 @@ ALTER TABLE `tb_detail_transaksi`
   ADD KEY `id_paket` (`id_paket`);
 
 --
--- Indexes for table `tb_karyawan`
+-- Indeks untuk tabel `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_member`
+-- Indeks untuk tabel `tb_member`
 --
 ALTER TABLE `tb_member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_outlet`
+-- Indeks untuk tabel `tb_outlet`
 --
 ALTER TABLE `tb_outlet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_paket`
+-- Indeks untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_outlet` (`id_outlet`);
 
 --
--- Indexes for table `tb_transaksi`
+-- Indeks untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   ADD PRIMARY KEY (`id`),
@@ -215,83 +187,83 @@ ALTER TABLE `tb_transaksi`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_outlet` (`id_outlet`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_detail_transaksi`
+-- AUTO_INCREMENT untuk tabel `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_karyawan`
+-- AUTO_INCREMENT untuk tabel `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_member`
+-- AUTO_INCREMENT untuk tabel `tb_member`
 --
 ALTER TABLE `tb_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_outlet`
+-- AUTO_INCREMENT untuk tabel `tb_outlet`
 --
 ALTER TABLE `tb_outlet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tb_paket`
+-- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_transaksi`
+-- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tb_detail_transaksi`
+-- Ketidakleluasaan untuk tabel `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
   ADD CONSTRAINT `tb_detail_transaksi_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_transaksi` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tb_detail_transaksi_ibfk_2` FOREIGN KEY (`id_paket`) REFERENCES `tb_paket` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `tb_karyawan`
+-- Ketidakleluasaan untuk tabel `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
   ADD CONSTRAINT `tb_karyawan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id`);
 
 --
--- Constraints for table `tb_paket`
+-- Ketidakleluasaan untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `tb_transaksi`
+-- Ketidakleluasaan untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   ADD CONSTRAINT `tb_transaksi_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE,
@@ -299,7 +271,7 @@ ALTER TABLE `tb_transaksi`
   ADD CONSTRAINT `tb_transaksi_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `tb_user`
+-- Ketidakleluasaan untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE;

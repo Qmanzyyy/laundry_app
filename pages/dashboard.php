@@ -25,7 +25,7 @@ include_once './components/function/loginChecker.php';
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
   <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/main.css" />
+  <link rel="stylesheet" href="./../style/tailwind.css" />
   <link rel="stylesheet" href="./../style/scrollbar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
 </head>

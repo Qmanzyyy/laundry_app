@@ -21,6 +21,7 @@ if (isset($_POST["submit"])) {
                 $_SESSION['user_name'] = $row["nama"];
                 $_SESSION['user_role'] = $row["role"];
                 $_SESSION['user_photo'] = $row["foto"];
+                $_SESSION['user_outlet'] = $row['id_outlet'];
                 header("Location: ./dashboard.php");
                 exit;
             } else {
