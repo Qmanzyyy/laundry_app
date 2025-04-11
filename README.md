@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">🧺 Proyek Laundry Kasir</h1>
+<h1 align="center">🧺 Laundry Apps</h1>
 <p align="center">Aplikasi kasir laundry berbasis <strong>PHP</strong> dan <strong>Tailwind CSS</strong> dengan fitur manajemen transaksi lengkap.</p>
 
 ---
