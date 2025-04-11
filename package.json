@@ -1,16 +1,17 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.0.14",
+    "mysql2": "^3.14.0",
     "tailwindcss": "^4.0.14"
   },
   "name": "laundry_app",
   "version": "1.0.0",
   "description": "## 📌 Deskripsi   Aplikasi Pengelolaan Laundry ini di buat karena tugas sekolah saya yang mengharuskan saya membuat aplikasi ini berikut fiturnya",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tailwindcss -i ./style/input.css -o ./style/tailwind.css --watch"
+    "dev": "tailwindcss -i ./style/input.css -o ./style/tailwind.css --watch",
+    "truncate": "node truncateTransaksi.js"
   },
   "repository": {
     "type": "git",
