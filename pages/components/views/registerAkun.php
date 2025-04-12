@@ -88,6 +88,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
         </form>
     </div>
 </main>
+<script src="./components/js/loginToggle.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var croppieInstance;

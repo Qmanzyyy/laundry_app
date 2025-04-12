@@ -1,6 +1,6 @@
 <?php 
 require_once "./components/function/editUser.php";
-
+$role = $_SESSION['user_role'];
 $query = "
     SELECT 
         u.id, u.nama, k.alamat, k.no_telp, k.shift_kerja, 
@@ -8,7 +8,7 @@ $query = "
     FROM tb_user u
     JOIN tb_karyawan k ON u.id = k.id_user
     JOIN tb_outlet o ON o.id = u.id_outlet
-    WHERE u.role != 'owner'
+    WHERE u.role != 'owner' && u.role !='$role'
 ";
 
 $keyword = $_GET["keyword"] ?? ""; 
@@ -56,8 +56,8 @@ $dataFound = !empty($users);
     <form action="" method="get" class="grid md:grid-cols-4">
       <div class="relative">
         <input type="hidden" name="tab" value="kelolaUser">
-        <input name="keyword" placeholder="Cari karyawan" type="text" value="<?= htmlspecialchars($_GET['nama'] ?? '') ?>" class="w-full p-1 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
-        <button class="w-5 absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer">
+        <input id="searchValue" name="keyword" placeholder="Cari karyawan" type="text" value="<?= htmlspecialchars($_GET['nama'] ?? '') ?>" class="w-full p-1 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
+        <button id="cari" class="w-5 absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer">
           <img src="./../img/search.png" alt="">
         </button>
       </div>
@@ -65,8 +65,8 @@ $dataFound = !empty($users);
 
     <p class="text-gray-500 mb-4 text-xs">Gunakan tabel di bawah untuk mengelola karyawan. Anda bisa mengedit atau menghapus data yang diperlukan.</p>
     <!-- Tabel untuk layar besar -->
-    <div class="hidden md:block overflow-x-auto max-w-full">
-    <table class="w-full border border-gray-300 bg-white rounded-lg overflow-hidden shadow-md">
+    <div class="hidden md:block overflow-x-auto max-w-full" id="tableBesar">
+    <table class="w-full border border-gray-300 bg-white rounded-lg overflow-hidden shadow-md" >
     <thead class="bg-blue-600 text-white uppercase text-xs md:text-sm leading-normal">
         <tr>
             <th class="py-2 md:py-3 px-4 text-left">No</th>
@@ -189,7 +189,7 @@ $dataFound = !empty($users);
 </main>
 
 <!-- Modal Edit User -->
-<div id="editModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 items-center justify-center flex hidden">
+<div id="editModal" class="fixed inset-0 bg-black/50 bg-opacity-50 items-center justify-center flex hidden">
   <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
     <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Karyawan</h2>
     <form id="editForm" action="" method="POST">
@@ -217,9 +217,10 @@ $dataFound = !empty($users);
       <div class="mb-4">
         <label class="block text-gray-600 font-medium">Role</label>
         <select name="role" id="edit_role" required class="w-full px-4 py-2 border rounded-lg">
+          <?php if($_SESSION['user_role'] == 'owner'):?>
           <option value="admin">Admin</option>
+          <?php endif;?>
           <option value="kasir">Kasir</option>
-          <option value="owner">Owner</option>
           <option value="petugas">Petugas</option>
         </select>
       </div>
@@ -229,4 +230,5 @@ $dataFound = !empty($users);
       </div>
     </form>
   </div>
-</div>z
+</div>
+<script src="./components/js/liveSearch.js"></script>

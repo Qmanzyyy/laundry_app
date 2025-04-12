@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tailwindcss -i ./style/input.css -o ./style/tailwind.css --watch",
-    "truncate": "node truncateTransaksi.js"
+    "truncateTransaksi": "node truncate/truncateTransaksi.js",
+    "truncateOutlet": "node truncate/truncateOutlet.js"
   },
   "repository": {
     "type": "git",

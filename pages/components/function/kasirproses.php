@@ -51,14 +51,31 @@ if (isset($_POST['submit'])) {
         </script>";
         exit;
     }
-
+    elseif ($jumlah < 1) {
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'qty tidak bisa negatif atau nol',
+                icon: 'error'
+            }).then(() => window.history.back());
+        </script>";
+        exit;
+    }
     // Waktu & kode invoice
+    date_default_timezone_set('Asia/Jakarta');
     $tanggal      = date("Y-m-d H:i:s");
     $batas_waktu  = date("Y-m-d H:i:s", strtotime("+3 days")); // Contoh batas waktu 3 hari
-    $kode_invoice = "INV" . date("YmdHis").$idoutlet;
+    $kode_invoice = "INV" . date("YmdHis").$idoutlet.$iduser;
 
     // Nilai default untuk field tambahan
-    $biaya_tambahan = 0;
+    if ($namapaket == 'reguler') {
+        $biaya_tambahan = 0; 
+    }elseif ($namapaket == 'Express') {
+        $biaya_tambahan = 10000;
+    }elseif ($namapaket == 'Premium') {
+        $biaya_tambahan = 15000;
+    }
     $diskon         = 0;
     $pajak          = 0;
 

@@ -26,7 +26,6 @@ include_once './components/function/loginChecker.php';
 
   <!-- ======= koneksi css ======= -->
   <link rel="stylesheet" href="./../style/tailwind.css" />
-  <link rel="stylesheet" href="./../style/scrollbar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
 </head>
 <body class="bg-gray-200 text-gray-800 relative ">
@@ -50,7 +49,6 @@ include_once './components/function/loginChecker.php';
     </div>
     <!-- ======= koneksi js ======= -->
     <script src="./components/js/action.js"></script>
-    <script src="./components/js/loginToggle.js"></script>
     <script src="./components/js/sidebarToggle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
