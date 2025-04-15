@@ -1,6 +1,5 @@
 <?php
 require_once "../config/db.php"; // Pastikan koneksi database di-*require*
-
 if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];

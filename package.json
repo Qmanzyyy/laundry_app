@@ -10,9 +10,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tailwindcss -i ./style/input.css -o ./style/tailwind.css --watch",
+    "dev": "tailwindcss -i ./style/input.css -o ./style/isi.css --watch",
     "truncateTransaksi": "node truncate/truncateTransaksi.js",
-    "truncateOutlet": "node truncate/truncateOutlet.js"
+    "truncateOutlet": "node truncate/truncateOutlet.js",
+    "truncateUser": "node truncate/truncateUser.js"
   },
   "repository": {
     "type": "git",

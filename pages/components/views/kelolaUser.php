@@ -8,7 +8,7 @@ $query = "
     FROM tb_user u
     JOIN tb_karyawan k ON u.id = k.id_user
     JOIN tb_outlet o ON o.id = u.id_outlet
-    WHERE u.role != 'owner' && u.role !='$role'
+    WHERE u.role != 'owner' && u.role !='$role' 
 ";
 
 $keyword = $_GET["keyword"] ?? ""; 

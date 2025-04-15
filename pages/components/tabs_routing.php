@@ -34,7 +34,8 @@ $views = [
     'kasir' => 'views/kasir.php',
     'registerAkun' => 'views/registerAkun.php',
     'tambahOutlet' => 'views/tambahOutlet.php',
-    'kelolaUser' => 'views/kelolaUser.php'
+    'kelolaUser' => 'views/kelolaUser.php',
+    'riwayatTransaksi' => 'views/riwayatTransaksi.php'
 ];
 
 if (isset($views[$tab])) {

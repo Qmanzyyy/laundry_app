@@ -63,7 +63,9 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
                         <select name="role" id="role" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#211C84] focus:outline-none">
                             <option disabled selected>-- Pilih Level --</option>
+                            <?php if($_SESSION['user_role'] == 'owner'):?>
                             <option value="admin">Admin</option>
+                            <?php endif;?>
                             <option value="kasir">Kasir</option>
                             <option value="petugas">Petugas</option>
                         </select>

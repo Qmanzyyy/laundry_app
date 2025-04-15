@@ -19,7 +19,7 @@
 <!-- ======= favicon ======== -->
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/tailwind.css" />
+  <link rel="stylesheet" href="./../style/isi.css" />
 
 </head>
 <body class="h-screen flex justify-center items-center bg-gray-200">

@@ -1,52 +1,61 @@
 <?php
+// Menampilkan semua pesan error untuk membantu debugging
 error_reporting(E_ALL);
+// Mulai output buffering untuk mengendalikan output
 ob_start();
+// Memanggil file konfigurasi untuk koneksi database
 require_once "../../../config/db.php";
+// Mengatur header respons agar output berupa teks biasa (plain text)
 header('Content-Type: text/plain');
 
+// Memeriksa apakah request adalah POST dan apakah ada parameter 'id' yang dikirimkan
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['id'])) {
+    // Jika tidak ada ID, hentikan output dan tampilkan pesan error
     ob_clean();
     echo "Error: ID tidak ditemukan.";
-    exit();
+    exit(); // Menghentikan eksekusi lebih lanjut
 }
 
+// Mengambil nilai ID dari data POST dan memastikan ID adalah integer
 $id = intval($_POST['id']);
+// Menyimpan informasi tentang ID yang diterima di log untuk keperluan debugging
 error_log("deleteUser.php: ID diterima = " . $id);
 
+// Memulai transaksi database untuk memastikan operasi ini dilakukan secara atomik
 $conn->begin_transaction();
+
 try {
-    $stmt1 = $conn->prepare("DELETE FROM tb_karyawan WHERE id_user = ?");
-    if (!$stmt1) {
-        error_log("Gagal menyiapkan statement tb_karyawan: " . $conn->error);
-        throw new Exception("Gagal menyiapkan statement tb_karyawan");
+    // Query untuk menghapus data karyawan berdasarkan ID user
+    $sql1 = "DELETE FROM tb_karyawan WHERE id_user = $id";
+    // Mengeksekusi query pertama dan memeriksa apakah berhasil
+    if (!$conn->query($sql1)) {
+        // Jika gagal, log error dan lemparkan pengecualian dengan pesan error
+        error_log("Eksekusi gagal untuk tb_karyawan: " . $conn->error);
+        throw new Exception($conn->error); // Melempar exception agar transaksi dibatalkan
     }
-    $stmt1->bind_param("i", $id);
-    $stmt1->execute();
-    if ($stmt1->error) {
-        error_log("Eksekusi gagal untuk tb_karyawan: " . $stmt1->error);
-        throw new Exception($stmt1->error);
+
+    // Query untuk menghapus data user berdasarkan ID
+    $sql2 = "DELETE FROM tb_user WHERE id = $id";
+    // Mengeksekusi query kedua dan memeriksa apakah berhasil
+    if (!$conn->query($sql2)) {
+        // Jika gagal, log error dan lemparkan pengecualian dengan pesan error
+        error_log("Eksekusi gagal untuk tb_user: " . $conn->error);
+        throw new Exception($conn->error); // Melempar exception agar transaksi dibatalkan
     }
-    
-    $stmt2 = $conn->prepare("DELETE FROM tb_user WHERE id = ?");
-    if (!$stmt2) {
-        error_log("Gagal menyiapkan statement tb_user: " . $conn->error);
-        throw new Exception("Gagal menyiapkan statement tb_user");
-    }
-    $stmt2->bind_param("i", $id);
-    $stmt2->execute();
-    if ($stmt2->error) {
-        error_log("Eksekusi gagal untuk tb_user: " . $stmt2->error);
-        throw new Exception($stmt2->error);
-    }
-    
+
+    // Jika kedua query berhasil, commit transaksi untuk menyimpan perubahan
     $conn->commit();
-    ob_clean();
-    echo "Success: Data karyawan berhasil dihapus.";
+    ob_clean(); // Membersihkan output buffer sebelum menampilkan hasil
+    echo "Success: Data karyawan berhasil dihapus."; // Menampilkan pesan sukses
+
 } catch (Exception $e) {
-    $conn->rollback(); 
+    // Jika terjadi kesalahan, rollback transaksi untuk membatalkan semua perubahan
+    $conn->rollback();
     
-    ob_clean();
+    ob_clean(); // Membersihkan output buffer sebelum menampilkan pesan error
+    // Mencatat pesan error pada log untuk keperluan debugging
     error_log("deleteUser.php: Exception ditangkap: " . $e->getMessage());
+    // Menampilkan pesan kesalahan kepada pengguna
     echo "Error: Terjadi kesalahan: " . $e->getMessage();
 }
 ?>
