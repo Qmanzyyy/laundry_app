@@ -1,9 +1,10 @@
 <?php
 $query = "
     SELECT 
-     t.id, t.tgl, p.jenis, p.jumlah, p.harga
+     t.id, t.tgl, p.jenis, p.jumlah, p.harga, t.deleted_at
      FROM tb_transaksi t
      JOIN tb_paket p ON t.id = p.id
+     WHERE t.deleted_at IS NULL
 ";
 
 $result = mysqli_query($conn, $query);
@@ -40,6 +41,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <td class="px-4 py-2 text-sm">Rp<?= number_format($transaksi['harga'], 0, ',', '.') ?></td>
             <td class="px-4 py-2 text-sm">
                 <a href="#"
+                   onclick="softDelete(<?= $transaksi['id'] ?>)"
                    class="inline-flex items-center px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"

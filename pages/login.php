@@ -19,10 +19,10 @@
 <!-- ======= favicon ======== -->
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/css.css" />
+  <link rel="stylesheet" href="./../style/csscss.css" />
 
 </head>
-<body class="h-screen flex justify-center items-center bg-gray-200">
+<body class="min-h-dvh flex justify-center items-center bg-gray-200">
   <form action="" method="post" class="md:flex bg-white shadow-[0_4px_10px_rgba(33,28,132,1)] rounded-lg border-2 border-[#211C84]">
     <div class="w-64 p-6 text-center">
       <h1 class="font-bold mb-4 text-[#211C84] text-3xl ">Login</h1>

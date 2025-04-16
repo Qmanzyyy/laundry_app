@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.14",
+    "@tailwindcss/cli": "^4.1.4",
     "mysql2": "^3.14.0",
-    "tailwindcss": "^4.0.14"
+    "tailwindcss": "^4.1.4"
   },
   "name": "laundry_app",
   "version": "1.0.0",
@@ -10,10 +10,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tailwindcss -i ./style/input.css -o ./style/css.css --watch",
+    "dev": "tailwindcss -i ./style/input.css -o ./style/csscss.css --watch",
     "truncateTransaksi": "node truncate/truncateTransaksi.js",
     "truncateOutlet": "node truncate/truncateOutlet.js",
-    "truncateUser": "node truncate/truncateUser.js"
+    "truncateUser": "node truncate/truncateUser.js",
+    "tambahUser": "node truncate/tambahUser.js"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 <!-- NAVBAR -->
-<header class="flex items-center justify-between py-4 px-6 bg-white shadow-sm fixed top-0 right-0 left-0 z-20 md:relative">
+
+<header id="navbar" class="flex items-center justify-between py-4 px-6 bg-white shadow-sm top-0 right-0 left-0 z-20  w-full">
   <!-- Left: Hamburger menu (untuk mobile) -->
   <button id="menuBtn" class="cursor-pointer md:hidden text-blue-900 focus:outline-none">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -63,4 +64,19 @@
       toggleModal('profileModal');
     }
   }
+</script>
+<script>
+  // Get the navbar element
+  const navbar = document.getElementById('navbar');
+
+  // Add an event listener to listen for scroll events
+  window.onscroll = function() {
+    if (window.pageYOffset > 0) {  // When the page is scrolled down
+      navbar.classList.add('fixed', 'top-0', 'w-full', 'shadow-lg');
+      navbar.classList.remove('relative');
+    } else { // When the page is at the top
+      navbar.classList.remove('fixed', 'top-0', 'w-full', 'shadow-lg');
+      navbar.classList.add('relative');
+    }
+  };
 </script>

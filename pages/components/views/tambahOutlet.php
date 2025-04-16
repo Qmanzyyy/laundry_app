@@ -1,7 +1,7 @@
 <?php 
 require_once "./components/function/tambahOutletProcces.php";
 ?>
-<main id="kasir" class="pt-24 md:p-6 px-6 bg-gray-50 min-h-screen">
+<main id="kasir" class="pt-24 md:p-6 px-6 bg-gray-50 min-h-dvh">
     <div class="max-w-md mx-auto bg-white shadow-xl rounded-2xl p-6 space-y-5">
         <h2 class="text-2xl font-semibold text-center text-indigo-600">Tambah Outlet</h2>
         <form action="" method="post" class="space-y-4">

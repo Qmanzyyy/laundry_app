@@ -2,7 +2,7 @@
 // Cek apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
     // Jika belum akan redirect ke halaman login
-    header("Location: /php/laundry_app/pages/login.php");
+    header("Location: ./pages/login.php");
     exit;
 } else {
     // Cek apakah ini adalah pertama kali login dalam sesi ini

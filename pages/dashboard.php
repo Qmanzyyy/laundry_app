@@ -25,13 +25,13 @@ include_once './components/function/loginChecker.php';
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
   <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/css.css" />
+  <link rel="stylesheet" href="./../style/csscss.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
 </head>
 <body class="bg-gray-200 text-gray-800 relative ">
 
   <!-- ======== Wrapper utama: sidebar + konten ======== -->
-  <div class="flex min-h-screen">
+  <div class="flex min-h-dvh">
 
     <!-- ======== sidebar ======== -->
     <?php include './components/sidebar.php';?>
@@ -50,6 +50,7 @@ include_once './components/function/loginChecker.php';
     <!-- ======= koneksi js ======= -->
     <script src="./components/js/action.js"></script>
     <script src="./components/js/sidebarToggle.js"></script>
+    <script src="./components/js/actionSoftDelete.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>

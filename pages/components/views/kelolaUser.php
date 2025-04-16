@@ -49,7 +49,7 @@ $dataFound = !empty($users);
     }
 </script>
 
-<main class="md:p-6 px-4 md:px-6 pt-24 min-h-screen bg-gray-200">
+<main class="md:p-6 px-4 md:px-6 pt-24 min-dvh bg-gray-200">
   <div class="bg-white p-6 rounded-lg shadow-lg">
     <h1 class="text-2xl font-semibold text-gray-800">Kelola Karyawan</h1>
     <!-- ======== search ======== -->
