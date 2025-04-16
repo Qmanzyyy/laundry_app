@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     // Session data
     $idoutlet = $_SESSION['user_outlet'] ?? null;
     $iduser   = $_SESSION['user_id'] ?? null;
-
+    $deleted_at = null;
     if (!$idoutlet || !$iduser || $jumlah === false) {
         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
         echo "<script>
@@ -108,11 +108,11 @@ if (isset($_POST['submit'])) {
         mysqli_stmt_close($stmt_paket);
 
         // Insert transaksi ke tb_transaksi
-        $stmt_transaksi = mysqli_prepare($conn, "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, tgl_bayar, biaya_tambahan, diskon, pajak, status, dibayar, id_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt_transaksi = mysqli_prepare($conn, "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, tgl_bayar, biaya_tambahan, diskon, pajak, status, dibayar, id_user,deleted_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
         if (!$stmt_transaksi) {
             throw new Exception("Prepared Statement Error (tb_transaksi): " . mysqli_error($conn));
         }
-        mysqli_stmt_bind_param($stmt_transaksi, "isisssdddssi",
+        mysqli_stmt_bind_param($stmt_transaksi, "isisssdddssid",
             $idoutlet, 
             $kode_invoice, 
             $id_member,
@@ -124,7 +124,8 @@ if (isset($_POST['submit'])) {
             $pajak,
             $status, 
             $bayar, 
-            $iduser
+            $iduser,
+            $deleted_at
         );
         if (!mysqli_stmt_execute($stmt_transaksi)) {
             throw new Exception("Gagal insert tb_transaksi: " . mysqli_stmt_error($stmt_transaksi));
