@@ -33,7 +33,7 @@ const truncateTables = () => {
 const insertUser = () => {
   connection.query(
     `INSERT INTO tb_user (nama, foto, username,password,id_outlet,role)
-     VALUES ('Miftahur Rahman', '', 'miftahur', '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm',1,'owner')`,
+     VALUES ('Miftahur Rahman', '', 'miftahur', '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm',1,'admin')`,
     (err, result) => {
       if (err) return console.error('Gagal insert tb_user:', err);
       console.log('Berhasil insert tb_user');
@@ -47,7 +47,7 @@ const insertUser = () => {
 const insertKaryawan = (idUser) => {
   connection.query(
     `INSERT INTO tb_karyawan (nama, alamat, no_telp, posisi, id_user, gaji, shift_kerja)
-     VALUES ('Miftahur Rahman', 'Dsn Pajaten Mas, Ds Bantarjati, Kec Kertajati', '081234567890', 'owner', ?, null, 'pagi')`,
+     VALUES ('Miftahur Rahman', 'Dsn Pajaten Mas, Ds Bantarjati, Kec Kertajati', '081234567890', 'admin', ?, null, 'pagi')`,
     [idUser],
     (err) => {
       if (err) return console.error('Gagal insert tb_karyawan:', err);

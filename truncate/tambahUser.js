@@ -16,6 +16,8 @@ const connection = mysql.createConnection({
   database: 'laundry',
 });
 
+const roles = ['admin', 'kasir']; // role yang mungkin
+
 // Fungsi utama
 const tambahUser = (index = 1) => {
   if (index > jumlahUser) {
@@ -26,16 +28,18 @@ const tambahUser = (index = 1) => {
 
   const nama = `User ${index}`;
   const username = `user${index}`;
-  const passwordHash = '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm'; // ganti sesuai hash kamu
+  const passwordHash = '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm'; // hash statis
+  const role = roles[Math.floor(Math.random() * roles.length)]; // pilih random
+
   const queryUser = `
     INSERT INTO tb_user (nama, foto, username, password, id_outlet, role)
-    VALUES (?, '', ?, ?, 1, 'kasir')
+    VALUES (?, '', ?, ?, 1, ?)
   `;
 
-  connection.query(queryUser, [nama, username, passwordHash], (err, result) => {
+  connection.query(queryUser, [nama, username, passwordHash, role], (err, result) => {
     if (err) {
       console.error(`❌ Gagal insert user ke-${index}:`, err);
-      tambahUser(index + 1); // tetap lanjut biar bisa insert sisanya
+      tambahUser(index + 1);
       return;
     }
 
@@ -49,9 +53,9 @@ const tambahUser = (index = 1) => {
       if (err) {
         console.error(`❌ Gagal insert karyawan untuk user ke-${index}:`, err);
       } else {
-        console.log(`✅ Berhasil insert user & karyawan ke-${index}`);
+        console.log(`✅ Berhasil insert user & karyawan ke-${index} dengan role ${role}`);
       }
-      tambahUser(index + 1); // lanjut ke user berikutnya
+      tambahUser(index + 1);
     });
   });
 };

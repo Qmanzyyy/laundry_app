@@ -67,7 +67,6 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
                             <option value="admin">Admin</option>
                             <?php endif;?>
                             <option value="kasir">Kasir</option>
-                            <option value="petugas">Petugas</option>
                         </select>
                     </div>
                     <div>

@@ -5,7 +5,11 @@ session_start();
 include_once './components/function/randomProfile.php';
 
 // login Checker
-include_once './components/function/loginChecker.php';
+if (!isset($_SESSION['user_id'])) {
+  // Jika belum akan redirect ke halaman login
+  header("Location: ./login.php");
+  exit;
+}
 
 ?>
 
@@ -25,7 +29,7 @@ include_once './components/function/loginChecker.php';
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
   <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/csscss.css" />
+  <link rel="stylesheet" href="./../style/tailcss.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
 </head>
 <body class="bg-gray-200 text-gray-800 relative ">

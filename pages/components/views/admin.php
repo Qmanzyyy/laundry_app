@@ -15,7 +15,7 @@
     <!-- Detail Akun -->
     <div class="bg-white rounded-lg shadow-md p-6 mt-4">
         <h2 class="text-lg font-semibold mb-4">Detail Akun</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 cursor-pointer">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 cursor-pointer">
             <?php 
             // Definisi warna dan ikon untuk setiap role
             foreach ($usersByRole as $role) : 

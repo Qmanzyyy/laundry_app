@@ -28,9 +28,7 @@
 ?>
 <main id="kasir" class="pt-24 md:p-6 px-6 min-h-dvh">
     <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-md p-6">
-        <h2 class="text-xl font-semibold text-indigo-600 mb-2 text-center">Form Transaksi</h2>
-        <hr class="mb-6">
-        
+        <h2 class="text-xl font-semibold text-indigo-600 mb-6 text-center">Form Kasir</h2>
         <!-- Form Input -->
         <form action="" method="POST">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">

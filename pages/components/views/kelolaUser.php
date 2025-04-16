@@ -27,13 +27,26 @@ if (!empty($keyword)) {
     "; 
 }
 
-$query .= " ORDER BY u.nama ASC";
+// Urutkan berdasarkan nama teks + angka di akhir jika ada
+$query .= "
+    ORDER BY 
+        CASE 
+            WHEN u.nama REGEXP '.*[0-9]+$' THEN SUBSTRING_INDEX(u.nama, ' ', 1)
+            ELSE u.nama
+        END ASC,
+        CASE 
+            WHEN u.nama REGEXP '.*[0-9]+$' THEN CAST(SUBSTRING_INDEX(u.nama, ' ', -1) AS UNSIGNED)
+            ELSE 0
+        END ASC
+";
+
 
 $users = query($query);
 
 // Cek apakah ada hasil
 $dataFound = !empty($users);
 ?>
+
 
 
 <style>
@@ -221,7 +234,6 @@ $dataFound = !empty($users);
           <option value="admin">Admin</option>
           <?php endif;?>
           <option value="kasir">Kasir</option>
-          <option value="petugas">Petugas</option>
         </select>
       </div>
       <div class="flex justify-end gap-4">

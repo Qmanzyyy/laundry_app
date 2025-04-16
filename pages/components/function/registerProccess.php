@@ -16,7 +16,6 @@ if (isset($_POST['submit'])) {
     $gaji = match ($role) {
         'kasir'   => 2500000.00,
         'admin'   => 3000000.00,
-        'petugas' => 2000000.00,
         default   => NULL // Owner tidak memiliki gaji
     };
 

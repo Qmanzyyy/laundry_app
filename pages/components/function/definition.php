@@ -2,13 +2,13 @@
 require './components/function/counter.php';
 // sidebar Definition
 $menuItems =[
-    "home" => ["icon" => "home", "label" => "Home", "role" => ["admin", "kasir", "owner", "petugas"],"tab" => "home"],
+    "home" => ["icon" => "home", "label" => "Home", "role" => ["admin", "kasir", "owner"],"tab" => "home"],
     "admin" => ["icon" => "admin", "label" => "Admin Menu", "role" => ["admin", "owner"],"tab" => "admin"],
     "register" => ["icon" => "register", "label" => "Register Karyawan", "role" => ["admin", "owner"],"tab" => "registerAkun"],
     "kelolaUser" => ["icon" => "kelolaUser", "label" => "Kelola User", "role" => ["admin", "owner"],"tab" => "kelolaUser"],
-    "tambahOutlet" => ["icon" => "tambahOutlet", "label" => "Tambah Outlet", "role" => ["owner"],"tab" => "tambahOutlet"],
-    "kasir" => ["icon" => "kasir", "label" => "Kasir Menu", "role" => ["kasir", "owner", "admin", "petugas"],"tab" => "kasir"],
-    "historyTransaksi" => ["icon" => "historyTransaksi", "label" => "history Transaksi", "role" => ["kasir", "owner", "admin", "petugas"],"tab" => "riwayatTransaksi"],
+    "tambahOutlet" => ["icon" => "tambahOutlet", "label" => "Tambah Outlet", "role" => ["admin"],"tab" => "tambahOutlet"],
+    "kasir" => ["icon" => "kasir", "label" => "Kasir Menu", "role" => ["kasir", "admin"],"tab" => "kasir"],
+    "historyTransaksi" => ["icon" => "historyTransaksi", "label" => "history Transaksi", "role" => ["kasir", "owner", "admin"],"tab" => "riwayatTransaksi"],
    ];
   
 $icon = [
@@ -37,7 +37,6 @@ $cards = [
 $roleStyles = [
     'admin'  => ['color' => 'bg-blue-500', 'icon' => './../img/admin.png'],
     'kasir'  => ['color' => 'bg-yellow-500', 'icon' => './../img/kasir.png'],
-    'owner'  => ['color' => 'bg-red-500', 'icon' => './../img/owner.png'],
-    'petugas' => ['color' => 'bg-green-500', 'icon' => './../img/petugas.png']
+    'owner'  => ['color' => 'bg-red-500', 'icon' => './../img/owner.png']
 ];
 // end admin dashboard Definition

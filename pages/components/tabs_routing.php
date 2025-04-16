@@ -11,22 +11,6 @@ if ($_SESSION['user_role'] == 'kasir' && in_array($tab, $kasir_dilarang)) {
     exit();
 }
 
-// Daftar tab yang dilarang untuk petugas
-$petugas_dilarang = ['admin', 'register', 'kelolaUser', 'registrasiAkun', 'tambahOutlet'];
-
-if ($_SESSION['user_role'] == 'petugas' && in_array($tab, $petugas_dilarang)) {
-    include_once 'views/access_denied.php';
-    exit();
-}
-
-// Daftar tab yang dilarang untuk admin
-$admin_dilarang = ['tambahOutlet'];
-
-if ($_SESSION['user_role'] == 'admin' && in_array($tab, $admin_dilarang)) {
-    include_once 'views/access_denied.php';
-    exit();
-}
-
 // Routing ke file view berdasarkan tab yang diminta
 $views = [
     'home' => 'views/home.php',
