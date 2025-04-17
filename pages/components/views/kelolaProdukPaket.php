@@ -12,7 +12,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<main class="py-10 bg-gray-50 min-h-screen">
+<main class="py-10 min-h-screen">
   <div class="container mx-auto px-4">
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">Kelola Jenis Cuci</h1>
     <button class="bg-indigo-600 text-white p-2 font-bold rounded-lg mb-3"><a href="?tab=kelolaPaket">Kelola Paket</a></button>

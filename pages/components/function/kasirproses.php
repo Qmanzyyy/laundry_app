@@ -62,25 +62,19 @@ if (isset($_POST['submit'])) {
         </script>";
         exit;
     }
+
     // Waktu & kode invoice
     date_default_timezone_set('Asia/Jakarta');
     $tanggal      = date("Y-m-d H:i:s");
     $batas_waktu  = date("Y-m-d H:i:s", strtotime("+3 days")); // Contoh batas waktu 3 hari
     $kode_invoice = "INV" . date("YmdHis").$idoutlet.$iduser;
 
-    // Nilai default untuk field tambahan
-    if ($namapaket == 'reguler') {
-        $biaya_tambahan = 0; 
-    }elseif ($namapaket == 'Express') {
-        $biaya_tambahan = 10000;
-    }elseif ($namapaket == 'Premium') {
-        $biaya_tambahan = 15000;
-    }
+    // nilai kosong
     $diskon         = 0;
     $pajak          = 0;
-
     mysqli_begin_transaction($conn);
-
+    // var_dump($_POST);
+    // exit;
     try {
         // Insert member ke tb_member
         $stmt_member = mysqli_prepare($conn, "INSERT INTO tb_member (nama, alamat, jenis_kelamin, tlp) VALUES (?, ?, ?, ?)");
@@ -107,26 +101,27 @@ if (isset($_POST['submit'])) {
         $id_paket = mysqli_insert_id($conn);
         mysqli_stmt_close($stmt_paket);
 
-        // Insert transaksi ke tb_transaksi
-        $stmt_transaksi = mysqli_prepare($conn, "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, tgl_bayar, biaya_tambahan, diskon, pajak, status, dibayar, id_user,deleted_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+        // Insert transaksi ke tb_transaksi 
+        $stmt_transaksi = mysqli_prepare($conn, "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, tgl_bayar, id_jenis_paket,id_jenis_cuci, diskon, pajak, status, dibayar, id_user,deleted_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
         if (!$stmt_transaksi) {
             throw new Exception("Prepared Statement Error (tb_transaksi): " . mysqli_error($conn));
         }
-        mysqli_stmt_bind_param($stmt_transaksi, "isisssdddssid",
-            $idoutlet, 
-            $kode_invoice, 
-            $id_member,
-            $tanggal, 
-            $batas_waktu, 
-            $tanggal,    // tgl_bayar (biasanya belum bayar, diset ke tanggal sebagai placeholder)
-            $biaya_tambahan, 
-            $diskon, 
-            $pajak,
-            $status, 
-            $bayar, 
-            $iduser,
-            $deleted_at
-        );
+            mysqli_stmt_bind_param($stmt_transaksi, "isisssssddssis",
+            $idoutlet,         // i
+            $kode_invoice,     // s
+            $id_member,        // i
+            $tanggal,          // s (tgl)
+            $batas_waktu,      // s
+            $tanggal,          // s (tgl_bayar)
+            $jenis,   // i ✅
+            $namapaket,    // i ✅
+            $diskon,           // d
+            $pajak,            // d
+            $status,           // s
+            $bayar,            // s
+            $iduser,           // i
+            $deleted_at        // s
+        );    
         if (!mysqli_stmt_execute($stmt_transaksi)) {
             throw new Exception("Gagal insert tb_transaksi: " . mysqli_stmt_error($stmt_transaksi));
         }

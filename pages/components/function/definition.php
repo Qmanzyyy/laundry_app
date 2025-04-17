@@ -9,10 +9,10 @@ $menuItems =[
     "tambahOutlet" => ["icon" => "tambahOutlet", "label" => "Tambah Outlet", "role" => ["admin"],"tab" => "tambahOutlet"],
     "kasir" => ["icon" => "kasir", "label" => "Kasir Menu", "role" => ["kasir", "admin"],"tab" => "kasir"],
     "historyTransaksi" => ["icon" => "historyTransaksi", "label" => "history Transaksi", "role" => ["kasir", "owner", "admin"],"tab" => "riwayatTransaksi"],
-    "Produk&Paket" => ["icon" => "produkPaket", "label" => "Ubah ProdukPaket", "role" => ["admin"],"tab" => "kelolaProdukPaket"],
+    "Produk&Paket" => ["icon" => "produkPaket", "label" => "Ubah Produk/Paket", "role" => ["admin"],"tab" => "kelolaProdukPaket"],
     "tambahProdukPaket" => ["icon" => "tambahProdukPaket", "label" => "Tambah Produk/Paket", "role" => ["admin"],"tab" => "tambahProdukPaket"],
    ];
-  
+
 $icon = [
     "home" => '<svg class="w-5 h-5 mr-2 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/></svg>',
     "admin" => '<svg class="w-5 h-5 mr-2 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5Zm16 14a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2ZM4 13a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6Zm16-2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6Z"/></svg>',

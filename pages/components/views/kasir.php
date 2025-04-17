@@ -1,121 +1,113 @@
 <?php 
-    require_once "./components/function/kasirproses.php";
-    $query = mysqli_query($conn, "SELECT * FROM tb_jenis_cuci");
-    $query2 = mysqli_query($conn, "SELECT * FROM tb_paket_cuci");
-    // Default harga untuk setiap jenis cucian
-    $harga_per_item = [
-        'kiloan'   => 10000,
-        'selimut'  => 25000,
-        'bed_cover'=> 30000,
-        'kaos'     => 15000,
-        'lain'     => 20000
-    ];
+require_once "./components/function/kasirproses.php";
 
-    // Harga untuk paket cuci
-    $harga_paket = [
-        'reguler' => 0,
-        'Express' => 10000,
-        'Premium' => 15000
-    ];
+// Ambil data dari database
+$query_jenis = mysqli_query($conn, "SELECT * FROM tb_jenis_cuci");
+$query_paket = mysqli_query($conn, "SELECT * FROM tb_paket_cuci");
 
-    // Cek jika jenis cucian dipilih (default menggunakan 'kiloan')
-    $jenis_cuci = isset($_POST['jenis']) ? $_POST['jenis'] : 'kiloan';
-    $qty        = isset($_POST['qty']) ? (int)$_POST['qty'] : 1;
-    $paket      = isset($_POST['namapaket']) ? $_POST['namapaket'] : 'reguler';
-    $harga      = $harga_per_item[$jenis_cuci] + $harga_paket[$paket];
-    // Ambil total dari input form jika tersedia, atau hitung dari harga dan quantity
-    $total      = isset($_POST['total']) ? (int)$_POST['total'] : ($harga * $qty);
-    $item_name  = ucfirst($jenis_cuci); 
+// Simpan data ke array
+$harga_per_item = $nama_jenis_cuci = $harga_paket = $nama_paket = [];
+
+while ($row = mysqli_fetch_assoc($query_jenis)) {
+    $harga_per_item[$row['id']] = $row['harga_cuci'];
+    $nama_jenis_cuci[$row['id']] = $row['jenis_cuci'];
+}
+
+while ($row = mysqli_fetch_assoc($query_paket)) {
+    $harga_paket[$row['id']] = $row['harga_paket'];
+    $nama_paket[$row['id']] = $row['paket_cuci'];
+}
+
+// Input default
+$jenis_cuci = $_POST['jenis'] ?? array_key_first($harga_per_item);
+$paket      = $_POST['namapaket'] ?? array_key_first($harga_paket);
+$qty        = (int) ($_POST['qty'] ?? 1);
+
+$harga = ($harga_per_item[$jenis_cuci] ?? 0) + ($harga_paket[$paket] ?? 0);
+$total = $_POST['total'] ?? ($harga * $qty);
+
+$item_name  = ucfirst($nama_jenis_cuci[$jenis_cuci] ?? '');
+$paket_name = ucfirst($nama_paket[$paket] ?? '');
 ?>
+
 <main id="kasir" class="pt-24 md:p-6 px-6 min-h-dvh">
     <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-md p-6">
         <h2 class="text-xl font-semibold text-indigo-600 mb-6 text-center">Form Kasir</h2>
-        <!-- Form Input -->
         <form action="" method="POST">
+            <!-- Input Pelanggan -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Nama -->
-                <div class="mb-4">
-                    <label for="nama" class="block mb-1 text-gray-700 font-medium">Nama:</label>
-                    <input type="text" name="nama" id="nama" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        required>
+                <div>
+                    <label for="nama" class="block mb-1 font-medium">Nama:</label>
+                    <input type="text" name="nama" id="nama" required
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500" />
                 </div>
-
-                <!-- Alamat -->
-                <div class="mb-4">
-                    <label for="alamat" class="block mb-1 text-gray-700 font-medium">Alamat:</label>
-                    <input type="text" name="alamat" id="alamat" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        required>
+                <div>
+                    <label for="alamat" class="block mb-1 font-medium">Alamat:</label>
+                    <input type="text" name="alamat" id="alamat" required
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500" />
                 </div>
-
-                <!-- Jenis Kelamin -->
-                <div class="mb-4">
-                    <label for="jeniskelamin" class="block mb-1 text-gray-700 font-medium">Jenis Kelamin:</label>
-                    <select name="jeniskelamin" id="jeniskelamin" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        required>
+                <div>
+                    <label for="jeniskelamin" class="block mb-1 font-medium">Jenis Kelamin:</label>
+                    <select name="jeniskelamin" id="jeniskelamin" required
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
                         <option disabled selected>-- Jenis Kelamin --</option>
                         <option value="L">Pria</option>
                         <option value="P">Wanita</option>
                     </select>
                 </div>
-
-                <!-- Telepon -->
-                <div class="mb-4">
-                    <label for="tlp" class="block mb-1 text-gray-700 font-medium">Telepon:</label>
-                    <input type="text" name="tlp" id="tlp" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        required pattern="\d+" maxlength="15">
+                <div>
+                    <label for="tlp" class="block mb-1 font-medium">Telepon:</label>
+                    <input type="text" name="tlp" id="tlp" required pattern="\d+" maxlength="15"
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500" />
                 </div>
             </div>
 
-            <!-- Jenis Cuci dan Paket -->
-            <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Jenis Cuci & Paket -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <label for="jenis" class="block mb-1 text-gray-700 font-medium">Jenis Cuci:</label>
-                    <select name="jenis" id="jenis" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        onchange="updateItem()" required>
+                    <label for="jenis" class="block mb-1 font-medium">Jenis Cuci:</label>
+                    <select name="jenis" id="jenis" required onchange="updateItem()"
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
                         <option disabled selected>-- Jenis Cuci --</option>
-                        <?php while ($row = mysqli_fetch_assoc($query)) : ?>
-                            <option value="<?php echo $row['id']; ?>" 
-                                <?php echo ($row['jenis_cuci'] == $jenis_cuci) ? 'selected' : ''; ?>>
-                                <?php echo ucfirst($row['jenis_cuci']); ?>
-                                <?= "| ".$row['harga_cuci'] ?>
-                                
+                        <?php foreach ($harga_per_item as $id => $harga): ?>
+                            <option value="<?= $id ?>" 
+                                data-jeniscuci="<?= $nama_jenis_cuci[$id] ?>" 
+                                data-harga="<?= $harga ?>" 
+                                <?= $id == $jenis_cuci ? 'selected' : '' ?>>
+                                <?= ucfirst($nama_jenis_cuci[$id]) ?> | Rp <?= number_format($harga) ?>
                             </option>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
-
                 <div>
-                    <label for="Paket" class="block mb-1 text-gray-700 font-medium">Paket Cuci:</label>
-                    <select name="namapaket" id="Paket" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        onchange="updateItem()" required>
+                    <label for="Paket" class="block mb-1 font-medium">Paket Cuci:</label>
+                    <select name="namapaket" id="Paket" required onchange="updateItem()"
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
                         <option disabled selected>-- Paket Cuci --</option>
-                        <?php while ($row2 = mysqli_fetch_assoc($query2)) : ?>
-                            <option value="<?php echo $row2['id']; ?>" 
-                                <?= ($row2['paket_cuci'] == $paket) ? 'selected' : ''; ?>>
-                                <?= ucfirst($row2['paket_cuci']); ?>
-                                <?= "| ". $row2['harga_paket'] ?>
+                        <?php foreach ($harga_paket as $id => $harga): ?>
+                            <option value="<?= $id ?>" 
+                                data-paketcuci="<?= $nama_paket[$id] ?>" 
+                                data-harga="<?= $harga ?>" 
+                                <?= $id == $paket ? 'selected' : '' ?>>
+                                <?= ucfirst($nama_paket[$id]) ?> | Rp <?= number_format($harga) ?>
                             </option>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="md:hidden">
-                    <label for="qty">qty:</label>
-                    <input type="number" id="qty-mobile" name="qty" value="<?php echo $qty; ?>" class="w-full px-4 py-2 border border-gray-300 rounded-md" onchange="updateTotal()">
+                    <label for="qty-mobile">Qty (kg):</label>
+                    <input type="number" id="qty-mobile" name="qty" value="<?= $qty ?>" onchange="updateTotal()"
+                        class="w-full px-4 py-2 border rounded-md" />
                 </div>
             </div>
-            <!-- Tabel Transaksi (Responsif) -->
-            <div class="overflow-x-auto mb-6 hidden md:block">
-                <table class="min-w-full border-collapse border border-gray-300 table-auto">
+
+            <!-- Tabel Desktop -->
+            <div class="overflow-x-auto hidden md:block mb-6">
+                <table class="min-w-full border border-gray-300">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="border px-4 py-2 text-left">Item</th>
-                            <th class="border px-4 py-2 text-left">Paket</th>
+                            <th class="border px-4 py-2">Item</th>
+                            <th class="border px-4 py-2">Paket</th>
                             <th class="border px-4 py-2 text-right">Harga per Item</th>
                             <th class="border px-4 py-2 text-center">Qty (kg)</th>
                             <th class="border px-4 py-2 text-right">Harga Paket</th>
@@ -124,134 +116,92 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="border px-4 py-2" id="item_name"><?php echo $item_name; ?></td>
-                            <td class="border px-4 py-2 text-left" id="item_paket">Reguler</td>
-                            <td class="border px-4 py-2 text-right" id="item_price">Rp <?php echo number_format($harga_per_item[$jenis_cuci], 0, ',', '.'); ?></td>
+                            <td class="border px-4 py-2" id="item_name"><?= $item_name ?></td>
+                            <td class="border px-4 py-2" id="item_paket"><?= $paket_name ?></td>
+                            <td class="border px-4 py-2 text-right" id="item_price">Rp <?= number_format($harga_per_item[$jenis_cuci]) ?></td>
                             <td class="border px-4 py-2 text-center">
-                                <input type="number" id="qty" name="qty" value="<?php echo $qty; ?>" class="w-full px-4 py-2 border border-gray-300 rounded-md" onchange="updateTotal()">
+                                <input type="number" id="qty" name="qty" value="<?= $qty ?>" onchange="updateTotal()"
+                                    class="w-full px-4 py-2 border rounded-md" />
                             </td>
-                            <td class="border px-4 py-2 text-right" id="paket_price">Rp <?php echo number_format($harga_paket[$paket], 0, ',', '.'); ?></td>
+                            <td class="border px-4 py-2 text-right" id="paket_price">Rp <?= number_format($harga_paket[$paket]) ?></td>
                             <td class="border px-4 py-2 text-right">
-                                <input type="text" id="total" value="Rp <?php echo number_format($total, 0, ',', '.'); ?>" class="w-full px-4 py-2 border border-gray-300 rounded-md" readonly>
+                                <input type="text" id="total" value="Rp <?= number_format($total) ?>" readonly
+                                    class="w-full px-4 py-2 border rounded-md" />
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <!-- Tampilan Mobile -->
             <div class="md:hidden bg-gray-100 p-4 rounded-md space-y-2">
-                <p><strong>Item:</strong> <span id="mobile_item_name"><?php echo $item_name; ?></span></p>
-                <p><strong>Paket:</strong> <span id="mobile_item_paket">Reguler</span></p>
-                <p><strong>Harga per Item:</strong> <span id="mobile_item_price">Rp <?php echo number_format($harga_per_item[$jenis_cuci], 0, ',', '.'); ?></span></p>
-                <p><strong>Qty (kg):</strong> <span id="mobile_qty"><?php echo $qty; ?></span></p>
-                <p><strong>Harga Paket:</strong> <span id="mobile_paket_price">Rp <?php echo number_format($harga_paket[$paket], 0, ',', '.'); ?></span></p>
-                <p><strong>Total:</strong> <span id="mobile_total">Rp <?php echo number_format($total, 0, ',', '.'); ?></span></p>
+                <p><strong>Item:</strong> <span id="mobile_item_name"><?= $item_name ?></span></p>
+                <p><strong>Paket:</strong> <span id="mobile_item_paket"><?= $paket_name ?></span></p>
+                <p><strong>Harga per Item:</strong> <span id="mobile_item_price">Rp <?= number_format($harga_per_item[$jenis_cuci]) ?></span></p>
+                <p><strong>Qty (kg):</strong> <span id="mobile_qty"><?= $qty ?></span></p>
+                <p><strong>Harga Paket:</strong> <span id="mobile_paket_price">Rp <?= number_format($harga_paket[$paket]) ?></span></p>
+                <p><strong>Total:</strong> <span id="mobile_total">Rp <?= number_format($total) ?></span></p>
             </div>
-            <!-- Subtotal dan Tombol -->
-            <!-- Bagian subtotal/grandtotal dapat diaktifkan bila diperlukan -->
-            <!--
-            <div class="text-center md:text-left mb-6">
-                <p class="text-gray-700">Sub Total: Rp <span id="subtotal"><?php echo number_format($total, 0, ',', '.'); ?></span></p>
-                <p class="text-gray-700">Diskon: Rp 0</p>
-                <p class="font-semibold text-gray-800">Grand Total: Rp <span id="grandtotal"><?php echo number_format($total, 0, ',', '.'); ?></span></p>
-            </div>
-            -->
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
-                <button type="submit" name="submit" 
+
+            <!-- Tombol Submit -->
+            <div class="flex flex-col md:flex-row justify-between items-center mt-6 space-y-4 md:space-y-0">
+                <button type="submit" name="submit"
                     class="bg-indigo-600 text-white font-medium py-2 px-6 rounded-md hover:bg-blue-600 shadow-md">
                     Proses Pembayaran
                 </button>
             </div>
 
-            <!-- Input tersembunyi untuk total -->
-            <input type="hidden" name="total" id="hidden_total" value="<?php echo $total; ?>">
+            <!-- Hidden Total -->
+            <input type="hidden" name="total" id="hidden_total" value="<?= $total ?>">
         </form>
     </div>
 </main>
 
 <script>
 function updateItem() {
-    var jenisCuci = document.getElementById('jenis').value;
-    var hargaPerItem = {
-        'kiloan': 10000,
-        'selimut': 25000,
-        'bed_cover': 30000,
-        'kaos': 15000,
-        'lain': 20000
-    };
-    var paketHarga = {
-        'reguler': 0,
-        'express': 10000,
-        'premium': 15000
-    };
-    var itemNames = {
-        'kiloan': 'Kiloan',
-        'selimut': 'Selimut',
-        'bed_cover': 'Bed Cover',
-        'kaos': 'Kaos',
-        'lain': 'Lain-lain'
-    };
+    const jenisSelect = document.getElementById('jenis');
+    const paketSelect = document.getElementById('Paket');
 
-    var harga = hargaPerItem[jenisCuci];
-    var itemName = itemNames[jenisCuci];
-    var paketValue = document.getElementById('Paket').value; // Ambil value dari select paket
+    const selectedJenis = jenisSelect.options[jenisSelect.selectedIndex];
+    const selectedPaket = paketSelect.options[paketSelect.selectedIndex];
 
-    if (paketValue) {
-        paketValue = paketValue.toLowerCase(); // Pastikan huruf kecil sesuai dengan key
-    } else {
-        paketValue = 'reguler'; // Default paket jika kosong
-    }
+    const hargaItem = parseInt(selectedJenis.dataset.harga || 0);
+    const itemName = selectedJenis.dataset.jeniscuci || '';
+    const hargaPaket = parseInt(selectedPaket.dataset.harga || 0);
+    const paketName = selectedPaket.dataset.paketcuci || '';
 
-    // Memperbarui nama item dan harga per item di desktop
+    // Desktop
     document.getElementById('item_name').textContent = itemName;
-    document.getElementById('item_price').textContent = 'Rp ' + harga.toLocaleString('id-ID');
-    document.getElementById('item_paket').textContent = paketValue.charAt(0).toUpperCase() + paketValue.slice(1); // Kapital pertama
+    document.getElementById('item_price').textContent = 'Rp ' + hargaItem.toLocaleString('id-ID');
+    document.getElementById('item_paket').textContent = paketName;
+    document.getElementById('paket_price').textContent = 'Rp ' + hargaPaket.toLocaleString('id-ID');
 
-    // Memperbarui harga paket di desktop
-    var paketHargaValue = paketHarga[paketValue] || 0;
-    document.getElementById('paket_price').textContent = 'Rp ' + paketHargaValue.toLocaleString('id-ID');
-
-    // Memperbarui elemen-elemen mobile
+    // Mobile
     document.getElementById('mobile_item_name').textContent = itemName;
-    document.getElementById('mobile_item_paket').textContent = paketValue.charAt(0).toUpperCase() + paketValue.slice(1); // Kapital pertama
-    document.getElementById('mobile_item_price').textContent = 'Rp ' + harga.toLocaleString('id-ID');
-    document.getElementById('mobile_paket_price').textContent = 'Rp ' + paketHargaValue.toLocaleString('id-ID');
+    document.getElementById('mobile_item_price').textContent = 'Rp ' + hargaItem.toLocaleString('id-ID');
+    document.getElementById('mobile_item_paket').textContent = paketName;
+    document.getElementById('mobile_paket_price').textContent = 'Rp ' + hargaPaket.toLocaleString('id-ID');
 
-    // Memperbarui total setelah perubahan jenis cucian atau paket
     updateTotal();
 }
 
 function updateTotal() {
-    var jenisCuci = document.getElementById('jenis').value;
-    var paketValue = document.getElementById('Paket').value.toLowerCase();
+    const jenisSelect = document.getElementById('jenis');
+    const paketSelect = document.getElementById('Paket');
 
-    // Ambil qty berdasarkan ukuran layar (mobile atau desktop)
-    var qty = 1;
-    if (window.innerWidth <= 768) {
-        qty = parseInt(document.getElementById('qty-mobile').value) || 1; // Untuk mobile
-        document.getElementById('mobile_qty').textContent = qty; // Update qty di tampilan mobile
-    } else {
-        qty = parseInt(document.getElementById('qty').value) || 1; // Untuk desktop
-    }
+    const hargaItem = parseInt(jenisSelect.options[jenisSelect.selectedIndex].dataset.harga || 0);
+    const hargaPaket = parseInt(paketSelect.options[paketSelect.selectedIndex].dataset.harga || 0);
 
-    var hargaPerItem = {
-        'kiloan': 10000,
-        'selimut': 25000,
-        'bed_cover': 30000,
-        'kaos': 15000,
-        'lain': 20000
-    };
-    var paketHarga = {
-        'reguler': 0,
-        'express': 10000,
-        'premium': 15000
-    };
+    const qtyInput = window.innerWidth <= 768 ? document.getElementById('qty-mobile') : document.getElementById('qty');
+    const qty = parseInt(qtyInput.value) || 1;
 
-    var total = (hargaPerItem[jenisCuci] + paketHarga[paketValue]) * qty;
+    const total = (hargaItem + hargaPaket) * qty;
 
-    // Update total di input dan juga hidden input
     document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
     document.getElementById('hidden_total').value = total;
     document.getElementById('mobile_total').textContent = 'Rp ' + total.toLocaleString('id-ID');
+    if (window.innerWidth <= 768) {
+        document.getElementById('mobile_qty').textContent = qty;
+    }
 }
-
 </script>

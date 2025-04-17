@@ -15,7 +15,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<main class="bg-gray-50 min-h-screen">
+<main class=" min-h-screen">
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl font-bold text-center mb-6">Riwayat Transaksi</h1>
 
