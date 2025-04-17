@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tailwindcss -i ./style/input.css -o ./style/tailcss.css --watch",
+    "dev": "tailwindcss -i ./style/input.css -o ./style/tailwindcss.css --watch",
     "truncateTransaksi": "node truncate/truncateTransaksi.js",
     "truncateOutlet": "node truncate/truncateOutlet.js",
     "truncateUser": "node truncate/truncateUser.js",

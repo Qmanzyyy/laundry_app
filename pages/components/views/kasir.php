@@ -1,6 +1,7 @@
 <?php 
     require_once "./components/function/kasirproses.php";
     $query = mysqli_query($conn, "SELECT * FROM tb_jenis_cuci");
+    $query2 = mysqli_query($conn, "SELECT * FROM tb_paket_cuci");
     // Default harga untuk setiap jenis cucian
     $harga_per_item = [
         'kiloan'   => 10000,
@@ -76,7 +77,15 @@
                     <select name="jenis" id="jenis" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         onchange="updateItem()" required>
-                        <option value=""></option>
+                        <option disabled selected>-- Jenis Cuci --</option>
+                        <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                            <option value="<?php echo $row['id']; ?>" 
+                                <?php echo ($row['jenis_cuci'] == $jenis_cuci) ? 'selected' : ''; ?>>
+                                <?php echo ucfirst($row['jenis_cuci']); ?>
+                                <?= "| ".$row['harga_cuci'] ?>
+                                
+                            </option>
+                        <?php endwhile; ?>
                     </select>
                 </div>
 
@@ -85,10 +94,14 @@
                     <select name="namapaket" id="Paket" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         onchange="updateItem()" required>
-                        <option disabled selected>-- Paket --</option>
-                        <option value="reguler">Reguler</option>
-                        <option value="Express">Express</option>
-                        <option value="Premium">Premium</option>
+                        <option disabled selected>-- Paket Cuci --</option>
+                        <?php while ($row2 = mysqli_fetch_assoc($query2)) : ?>
+                            <option value="<?php echo $row2['id']; ?>" 
+                                <?= ($row2['paket_cuci'] == $paket) ? 'selected' : ''; ?>>
+                                <?= ucfirst($row2['paket_cuci']); ?>
+                                <?= "| ". $row2['harga_paket'] ?>
+                            </option>
+                        <?php endwhile; ?>
                     </select>
                 </div>
                 <div class="md:hidden">

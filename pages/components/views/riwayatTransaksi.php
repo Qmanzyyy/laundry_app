@@ -15,7 +15,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<main>
+<main class="bg-gray-50 min-h-screen">
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl font-bold text-center mb-6">Riwayat Transaksi</h1>
 
@@ -56,7 +56,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Jenis Cuci</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Jumlah</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Total Harga</th>
+                        <?php if ($_SESSION['user_role'] != 'kasir'):?>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Aksi</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +69,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <td class="px-4 py-2 text-sm"><?= $row['jenis'] ?></td>
                             <td class="px-4 py-2 text-sm"><?= $row['jumlah'] ?></td>
                             <td class="px-4 py-2 text-sm">Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
+                            <?php if ($_SESSION['user_role'] != 'kasir'):?>
                             <td class="px-4 py-2 text-sm">
                                 <a href="#"
                                    onclick="softDelete(<?= $row['id'] ?>)"
@@ -83,6 +86,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     Hapus
                                 </a>
                             </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

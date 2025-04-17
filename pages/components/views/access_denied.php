@@ -1,5 +1,5 @@
 <div class="h-full flex flex-col items-center justify-center bg-red-500 text-white text-center font-bold pt-24 md:pt-6 px-6">
-    <p>⚠️ Akses Ditolak! Anda tidak memiliki izin untuk mengakses halaman ini.</p>
+    <p>⚠️ Akses Ditolak! Anda tidak memiliki izin untuk mengakses halaman ini.</p>a
     <p>Anda akan dialihkan dalam <span id="countdown3">5</span> detik...</p>
 </div>
 

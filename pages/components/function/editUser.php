@@ -10,6 +10,7 @@ if (isset($_POST['update'])) {
     $username = $_POST['username'];
     $role = $_POST['role'];
 
+    
     // Update user
     $updateUser = "UPDATE tb_user SET nama=?, username=?, role=? WHERE id=?";
     $stmt = $conn->prepare($updateUser);
