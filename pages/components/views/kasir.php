@@ -76,12 +76,7 @@
                     <select name="jenis" id="jenis" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         onchange="updateItem()" required>
-                        <option disabled selected>-- Jenis Cuci --</option>
-                        <option value="kiloan">Kiloan</option>
-                        <option value="selimut">Selimut</option>
-                        <option value="bed_cover">Bed Cover</option>
-                        <option value="kaos">Kaos</option>
-                        <option value="lain">Lain-lain</option>
+                        <option value=""></option>
                     </select>
                 </div>
 
