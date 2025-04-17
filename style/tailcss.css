@@ -392,12 +392,6 @@
   .min-h-dvh {
     min-height: 100dvh;
   }
-  .w-1 {
-    width: calc(var(--spacing) * 1);
-  }
-  .w-1\/2 {
-    width: calc(1/2 * 100%);
-  }
   .w-4 {
     width: calc(var(--spacing) * 4);
   }
@@ -501,6 +495,15 @@
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -524,9 +527,6 @@
   }
   .justify-end {
     justify-content: flex-end;
-  }
-  .justify-evenly {
-    justify-content: space-evenly;
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -589,6 +589,9 @@
   .overflow-y-auto {
     overflow-y: auto;
   }
+  .rounded {
+    border-radius: 0.25rem;
+  }
   .rounded-2xl {
     border-radius: var(--radius-2xl);
   }
@@ -619,6 +622,10 @@
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
+  }
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
   }
   .border-\[\#7A73D1\] {
     border-color: #7A73D1;
@@ -909,11 +916,6 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-  .transition-all {
-    transition-property: all;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
   .transition-transform {
     transition-property: transform, translate, scale, rotate;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -1057,13 +1059,6 @@
       }
     }
   }
-  .hover\:bg-indigo-800 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-indigo-800);
-      }
-    }
-  }
   .hover\:bg-pink-600 {
     &:hover {
       @media (hover: hover) {
@@ -1166,11 +1161,6 @@
   .active\:bg-\[\#211C84\] {
     &:active {
       background-color: #211C84;
-    }
-  }
-  .sm\:mt-0 {
-    @media (width >= 40rem) {
-      margin-top: calc(var(--spacing) * 0);
     }
   }
   .sm\:flex {

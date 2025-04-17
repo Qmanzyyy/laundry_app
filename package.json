@@ -14,7 +14,8 @@
     "truncateTransaksi": "node truncate/truncateTransaksi.js",
     "truncateOutlet": "node truncate/truncateOutlet.js",
     "truncateUser": "node truncate/truncateUser.js",
-    "tambahUser": "node truncate/tambahUser.js"
+    "tambahUser": "node truncate/tambahUser.js",
+    "truncatePaket": "node truncate/truncatePaket.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 <?php 
     require_once "./components/function/kasirproses.php";
-
+    $query = mysqli_query($conn, "SELECT * FROM tb_jenis_cuci");
     // Default harga untuk setiap jenis cucian
     $harga_per_item = [
         'kiloan'   => 10000,
