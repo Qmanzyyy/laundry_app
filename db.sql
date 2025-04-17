@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 17 Apr 2025 pada 10.20
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Apr 17, 2025 at 09:46 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,31 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_detail_transaksi`
+-- Table structure for table `tb_detail_transaksi`
 --
 
 CREATE TABLE `tb_detail_transaksi` (
-  `id` int(11) NOT NULL,
-  `id_transaksi` int(11) DEFAULT NULL,
-  `id_paket` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `keterangan` text DEFAULT NULL
+  `id` int NOT NULL,
+  `id_transaksi` int DEFAULT NULL,
+  `id_paket` int DEFAULT NULL,
+  `qty` int DEFAULT NULL,
+  `keterangan` text COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jenis_cuci`
+-- Table structure for table `tb_jenis_cuci`
 --
 
 CREATE TABLE `tb_jenis_cuci` (
-  `id` int(11) NOT NULL,
-  `jenis_cuci` varchar(255) NOT NULL,
-  `harga_cuci` int(11) NOT NULL
+  `id` int NOT NULL,
+  `jenis_cuci` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `harga_cuci` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_jenis_cuci`
+-- Dumping data for table `tb_jenis_cuci`
 --
 
 INSERT INTO `tb_jenis_cuci` (`id`, `jenis_cuci`, `harga_cuci`) VALUES
@@ -58,22 +58,22 @@ INSERT INTO `tb_jenis_cuci` (`id`, `jenis_cuci`, `harga_cuci`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_karyawan`
+-- Table structure for table `tb_karyawan`
 --
 
 CREATE TABLE `tb_karyawan` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `no_telp` varchar(20) NOT NULL,
-  `posisi` enum('kasir','admin','owner') NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_general_ci NOT NULL,
+  `no_telp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `posisi` enum('kasir','admin','owner') COLLATE utf8mb4_general_ci NOT NULL,
+  `id_user` int NOT NULL,
   `gaji` decimal(10,2) DEFAULT NULL,
-  `shift_kerja` enum('pagi','malam') NOT NULL
+  `shift_kerja` enum('pagi','malam') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_karyawan`
+-- Dumping data for table `tb_karyawan`
 --
 
 INSERT INTO `tb_karyawan` (`id`, `nama`, `alamat`, `no_telp`, `posisi`, `id_user`, `gaji`, `shift_kerja`) VALUES
@@ -83,32 +83,32 @@ INSERT INTO `tb_karyawan` (`id`, `nama`, `alamat`, `no_telp`, `posisi`, `id_user
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_member`
+-- Table structure for table `tb_member`
 --
 
 CREATE TABLE `tb_member` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `alamat` text NOT NULL,
-  `jenis_kelamin` enum('L','P') NOT NULL,
-  `tlp` varchar(15) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_general_ci NOT NULL,
+  `jenis_kelamin` enum('L','P') COLLATE utf8mb4_general_ci NOT NULL,
+  `tlp` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_outlet`
+-- Table structure for table `tb_outlet`
 --
 
 CREATE TABLE `tb_outlet` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `alamat` text NOT NULL,
-  `tlp` varchar(15) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_general_ci NOT NULL,
+  `tlp` varchar(15) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_outlet`
+-- Dumping data for table `tb_outlet`
 --
 
 INSERT INTO `tb_outlet` (`id`, `nama`, `alamat`, `tlp`) VALUES
@@ -117,32 +117,32 @@ INSERT INTO `tb_outlet` (`id`, `nama`, `alamat`, `tlp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_paket`
+-- Table structure for table `tb_paket`
 --
 
 CREATE TABLE `tb_paket` (
-  `id` int(11) NOT NULL,
-  `id_outlet` int(11) DEFAULT NULL,
-  `jenis` enum('kiloan','selimut','bed_cover','kaos','lain') NOT NULL,
-  `jumlah` int(11) NOT NULL DEFAULT 1,
-  `nama_paket` varchar(100) NOT NULL,
-  `harga` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_outlet` int DEFAULT NULL,
+  `jenis` enum('kiloan','selimut','bed_cover','kaos','lain') COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah` int DEFAULT '1',
+  `nama_paket` int DEFAULT NULL,
+  `harga` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_paket_cuci`
+-- Table structure for table `tb_paket_cuci`
 --
 
 CREATE TABLE `tb_paket_cuci` (
-  `id` int(11) NOT NULL,
-  `paket_cuci` varchar(255) NOT NULL,
-  `harga_paket` int(11) NOT NULL
+  `id` int NOT NULL,
+  `paket_cuci` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `harga_paket` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_paket_cuci`
+-- Dumping data for table `tb_paket_cuci`
 --
 
 INSERT INTO `tb_paket_cuci` (`id`, `paket_cuci`, `harga_paket`) VALUES
@@ -152,45 +152,45 @@ INSERT INTO `tb_paket_cuci` (`id`, `paket_cuci`, `harga_paket`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_transaksi`
+-- Table structure for table `tb_transaksi`
 --
 
 CREATE TABLE `tb_transaksi` (
-  `id` int(11) NOT NULL,
-  `id_outlet` int(11) DEFAULT NULL,
-  `kode_invoice` varchar(100) NOT NULL,
-  `id_member` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `id_outlet` int DEFAULT NULL,
+  `kode_invoice` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_member` int DEFAULT NULL,
   `tgl` datetime NOT NULL,
   `batas_waktu` datetime NOT NULL,
   `tgl_bayar` datetime DEFAULT NULL,
-  `id_jenis_paket` int(11) DEFAULT NULL,
-  `id_jenis_cuci` int(11) DEFAULT NULL,
+  `id_jenis_paket` int DEFAULT NULL,
+  `id_jenis_cuci` int DEFAULT NULL,
   `diskon` double DEFAULT NULL,
-  `pajak` int(11) DEFAULT NULL,
-  `status` enum('baru','proses','selesai','diambil') NOT NULL,
-  `dibayar` enum('dibayar','belum_dibayar') NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
+  `pajak` int DEFAULT NULL,
+  `status` enum('baru','proses','selesai','diambil') COLLATE utf8mb4_general_ci NOT NULL,
+  `dibayar` enum('dibayar','belum_dibayar') COLLATE utf8mb4_general_ci NOT NULL,
+  `id_user` int DEFAULT NULL,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `foto` varchar(250) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` text NOT NULL,
-  `id_outlet` int(11) DEFAULT NULL,
-  `role` enum('admin','kasir','owner') NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `foto` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` text COLLATE utf8mb4_general_ci NOT NULL,
+  `id_outlet` int DEFAULT NULL,
+  `role` enum('admin','kasir','owner') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_user`
+-- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`id`, `nama`, `foto`, `username`, `password`, `id_outlet`, `role`) VALUES
@@ -202,7 +202,7 @@ INSERT INTO `tb_user` (`id`, `nama`, `foto`, `username`, `password`, `id_outlet`
 --
 
 --
--- Indeks untuk tabel `tb_detail_transaksi`
+-- Indexes for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
   ADD PRIMARY KEY (`id`),
@@ -210,45 +210,46 @@ ALTER TABLE `tb_detail_transaksi`
   ADD KEY `id_paket` (`id_paket`);
 
 --
--- Indeks untuk tabel `tb_jenis_cuci`
+-- Indexes for table `tb_jenis_cuci`
 --
 ALTER TABLE `tb_jenis_cuci`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_karyawan`
+-- Indexes for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `tb_member`
+-- Indexes for table `tb_member`
 --
 ALTER TABLE `tb_member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_outlet`
+-- Indexes for table `tb_outlet`
 --
 ALTER TABLE `tb_outlet`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_paket`
+-- Indexes for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_outlet` (`id_outlet`);
+  ADD KEY `id_outlet` (`id_outlet`),
+  ADD KEY `nama_paket` (`nama_paket`);
 
 --
--- Indeks untuk tabel `tb_paket_cuci`
+-- Indexes for table `tb_paket_cuci`
 --
 ALTER TABLE `tb_paket_cuci`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_transaksi`
+-- Indexes for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   ADD PRIMARY KEY (`id`),
@@ -259,95 +260,96 @@ ALTER TABLE `tb_transaksi`
   ADD KEY `id_jenis_cuci` (`id_jenis_cuci`);
 
 --
--- Indeks untuk tabel `tb_user`
+-- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_outlet` (`id_outlet`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_detail_transaksi`
+-- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_jenis_cuci`
+-- AUTO_INCREMENT for table `tb_jenis_cuci`
 --
 ALTER TABLE `tb_jenis_cuci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_karyawan`
+-- AUTO_INCREMENT for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_member`
+-- AUTO_INCREMENT for table `tb_member`
 --
 ALTER TABLE `tb_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_outlet`
+-- AUTO_INCREMENT for table `tb_outlet`
 --
 ALTER TABLE `tb_outlet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_paket`
+-- AUTO_INCREMENT for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_paket_cuci`
+-- AUTO_INCREMENT for table `tb_paket_cuci`
 --
 ALTER TABLE `tb_paket_cuci`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_transaksi`
+-- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_user`
+-- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_detail_transaksi`
+-- Constraints for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
   ADD CONSTRAINT `tb_detail_transaksi_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_transaksi` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tb_detail_transaksi_ibfk_2` FOREIGN KEY (`id_paket`) REFERENCES `tb_paket` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_karyawan`
+-- Constraints for table `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
   ADD CONSTRAINT `tb_karyawan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_paket`
+-- Constraints for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tb_paket_ibfk_2` FOREIGN KEY (`nama_paket`) REFERENCES `tb_paket_cuci` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_transaksi`
+-- Constraints for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
   ADD CONSTRAINT `tb_transaksi_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE,
@@ -357,7 +359,7 @@ ALTER TABLE `tb_transaksi`
   ADD CONSTRAINT `tb_transaksi_ibfk_5` FOREIGN KEY (`id_jenis_paket`) REFERENCES `tb_paket_cuci` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_user`
+-- Constraints for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`id_outlet`) REFERENCES `tb_outlet` (`id`) ON DELETE CASCADE;

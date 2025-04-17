@@ -2,6 +2,7 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.4",
     "mysql2": "^3.14.0",
+    "mysqldump": "^3.2.0",
     "tailwindcss": "^4.1.4"
   },
   "name": "laundry_app",
@@ -15,7 +16,8 @@
     "truncateOutlet": "node truncate/truncateOutlet.js",
     "truncateUser": "node truncate/truncateUser.js",
     "tambahUser": "node truncate/tambahUser.js",
-    "truncatePaket": "node truncate/truncatePaket.js"
+    "truncatePaket": "node truncate/truncatePaket.js",
+    "backupDatabase": "node truncate/backupDatabase.js"
   },
   "repository": {
     "type": "git",
