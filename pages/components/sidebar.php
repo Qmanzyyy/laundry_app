@@ -7,13 +7,13 @@
   $userRole = $_SESSION['user_role'];
 ?>
 <!-- SIDEBAR -->
-    <aside id="sidebar" class="fixed z-20 inset-0 flex-none w-64 bg-blue-900 text-white transform -translate-x-full md:translate-x-0 md:relative md:transform-none transition-transform duration-200 ease-in-out">
+    <aside id="sidebar" class="fixed z-50 inset-0 flex-none w-64 bg-blue-900 text-white transform -translate-x-full  transition-transform duration-200 ease-in-out">
       <div class="flex flex-col h-full">
         <!-- Brand / Logo -->
-        <div class="flex items-center md:justify-center justify-around h-16 bg-blue-800 shadow-md">
+        <div class="flex items-center justify-around h-16 bg-blue-800 shadow-md">
           <span class="text-xl font-bold">Laundry Rml</span>
-          <button id="menuBtn2" class="rounded-lg hover:bg-blue-950 p-2 cursor-pointer md:hidden">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white md:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <button id="menuBtn2" class=" hover:bg-blue-900 hover:text-red-600 rounded-full p-2 cursor-pointer">
+            <svg class="w-6 h-6text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
             </svg>
           </button>
@@ -47,4 +47,4 @@
         </div>
       </div>
     </aside>
-    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/25 z-10 md:hidden"></div>
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/25 z-10 "></div>

@@ -1,19 +1,19 @@
 <!-- NAVBAR -->
 
-<header id="navbar" class="flex items-center justify-between py-4 px-6 bg-white shadow-sm top-0 right-0 left-0 z-20  w-full">
+<header id="navbar" class="sticky top-0 z-20 bg-white shadow-sm transition-all duration-300 ease-in-out flex items-center justify-between py-4 px-6">
   <!-- Left: Hamburger menu (untuk mobile) -->
-  <button id="menuBtn" class="cursor-pointer md:hidden text-blue-900 focus:outline-none">
+  <button id="menuBtn" class="cursor-pointer hover:text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path d="M4 6h16M4 12h16M4 18h16"></path>
     </svg>
   </button>
 
   <!-- Middle: Search bar (opsional) -->
-  <div class="flex-1 mx-4">
+  <!-- <div class="flex-1 mx-4">
     <div class="relative">
-      <!-- <input type="search" placeholder="Type to search..."> -->
+      <input type="search" placeholder="Type to search...">
     </div>
-  </div>
+  </div> -->
 
   <!-- Right: User info -->
   <div class="flex items-center space-x-4">
@@ -66,17 +66,16 @@
   }
 </script>
 <script>
-  // Get the navbar element
   const navbar = document.getElementById('navbar');
 
-  // Add an event listener to listen for scroll events
-  window.onscroll = function() {
-    if (window.pageYOffset > 0) {  // When the page is scrolled down
-      navbar.classList.add('fixed', 'top-0', 'w-full', 'shadow-lg');
-      navbar.classList.remove('relative');
-    } else { // When the page is at the top
-      navbar.classList.remove('fixed', 'top-0', 'w-full', 'shadow-lg');
-      navbar.classList.add('relative');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      navbar.classList.add('shadow-2xl');
+      navbar.classList.remove('shadow-sm');
+    } else {
+      navbar.classList.remove('shadow-2xl');
+      navbar.classList.add('shadow-sm');
     }
-  };
+  });
 </script>
+

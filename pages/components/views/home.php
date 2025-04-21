@@ -1,4 +1,4 @@
-<main class="md:p-6 px-6 pt-24 ">
+<main class="md:p-6 px-6 py-6 ">
     <div class="bg-white p-6 rounded-lg shadow">
         <div class="flex items-center space-x-4">
             <div class="p-3  text-white rounded-full">
@@ -15,6 +15,6 @@
             </div>
         </div>
         <hr class="my-4 border-gray-200">
-        <p class="text-gray-500">How can we assist you today? Choose an option from the menu.</p>
+        <p class="text-gray-500">How can we assist you today? Choose an option from the Hamburger Menu.</p>
     </div>
 </main>

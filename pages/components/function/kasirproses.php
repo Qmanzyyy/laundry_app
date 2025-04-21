@@ -113,8 +113,8 @@ if (isset($_POST['submit'])) {
             $tanggal,          // s (tgl)
             $batas_waktu,      // s
             $tanggal,          // s (tgl_bayar)
-            $jenis,   // i ✅
             $namapaket,    // i ✅
+            $jenis,   // i ✅
             $diskon,           // d
             $pajak,            // d
             $status,           // s

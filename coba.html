@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vertical Text Slide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+
+  <div class="relative w-64 h-16 overflow-hidden">
+    <div id="text-container" class="absolute top-0 transition-all duration-500 ease-in-out">
+      <div class="h-16 flex items-center justify-center text-2xl font-semibold">Aku</div>
+      <div class="h-16 flex items-center justify-center text-2xl font-semibold">Kamu</div>
+      <div class="h-16 flex items-center justify-center text-2xl font-semibold">Dia</div>
+      <div class="h-16 flex items-center justify-center text-2xl font-semibold">Semua</div>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('text-container');
+    const texts = container.children;
+    const itemHeight = 64; // px
+    let index = 0;
+
+    // ⏱️ Durasi tampil untuk masing-masing teks (dalam ms)
+    const durations = [3000, 2000, 4000, 2500]; // Aku = 3 detik, Kamu = 2 detik, etc.
+
+    function slideText() {
+      container.style.top = `-${index * itemHeight}px`;
+      index = (index + 1) % texts.length;
+    }
+
+    // Ganti interval sesuai durasi tiap teks
+    let interval = setInterval(slideText, durations[index]);
+
+    // Update interval saat index berubah
+    setInterval(() => {
+      clearInterval(interval);
+      interval = setInterval(slideText, durations[index]);
+    }, Math.max(...durations));
+  </script>
+
+</body>
+</html>

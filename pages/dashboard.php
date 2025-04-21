@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
   <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/tailwindcss.css" />
+  <link rel="stylesheet" href="./../style/windatata.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
 </head>
 <body class="bg-gray-200 text-gray-800 relative ">

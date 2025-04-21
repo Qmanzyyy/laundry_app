@@ -23,7 +23,8 @@ if (isset($_POST['updateJenisCuci'])) {
                 window.location.href = './dashboard.php?tab=kelolaProdukPaket';
             });
         </script>";
-}elseif (isset($_POST['updateJenisPaket'])) {
+}
+if (isset($_POST['updateJenisPaket'])) {
     $id_jenis_cuci = $_POST['id'];
     $jenis_cuci = $_POST['paket_cuci'];
     $harga_cuci = $_POST['harga_paket'];

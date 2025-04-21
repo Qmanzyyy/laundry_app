@@ -1,7 +1,8 @@
 <?php 
+// tambah data ke tb_jenis_cuci
 if (isset($_POST['submit'])) {
     $produk = $_POST['Produk'];
-    $harga_produk = $_POST['HargaProduk'];
+    $harga_produk = (int)$_POST['HargaProduk'];
     
 
     // Validasi dasar
@@ -33,9 +34,9 @@ if (isset($_POST['submit'])) {
         echo "<script>
             Swal.fire({
                 title: 'Berhasil!',
-                text: 'Produk dan paket berhasil ditambahkan!',
+                text: 'Jenis Cuci Berhasil Ditambahkan!',
                 icon: 'success'
-            }).then(() => window.location.href = './dashboard.php?tab=tambahProdukPaket');
+            }).then(() => window.location.href = './dashboard.php?tab=kelolaProdukPaket');
         </script>";
 
     } catch (Exception $e) {
@@ -51,6 +52,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
+// tambah data kedalam tb_paket_cuci
 if (isset($_POST['submitPaket'])) {
     $paket = $_POST['Paket'];
     $harga_paket = $_POST['HargaPaket'];
@@ -87,7 +89,7 @@ if (isset($_POST['submitPaket'])) {
                 title: 'Berhasil!',
                 text: 'paket berhasil ditambahkan!',
                 icon: 'success'
-            }).then(() => window.location.href = './dashboard.php?tab=tambahProdukPaket');
+            }).then(() => window.location.href = './dashboard.php?tab=kelolaPaket');
         </script>";
 
     } catch (Exception $e) {

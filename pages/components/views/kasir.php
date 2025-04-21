@@ -30,9 +30,9 @@ $item_name  = ucfirst($nama_jenis_cuci[$jenis_cuci] ?? '');
 $paket_name = ucfirst($nama_paket[$paket] ?? '');
 ?>
 
-<main id="kasir" class="pt-24 md:p-6 px-6 min-h-dvh">
+<main id="kasir" class="md:p-6 px-6 py-6 min-h-dvh">
     <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-md p-6">
-        <h2 class="text-xl font-semibold text-indigo-600 mb-6 text-center">Form Kasir</h2>
+        <h2 class="text-2xl font-semibold text-blue-600 mb-6 text-center">Form Kasir</h2>
         <form action="" method="POST">
             <!-- Input Pelanggan -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -146,7 +146,7 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
             <!-- Tombol Submit -->
             <div class="flex flex-col md:flex-row justify-between items-center mt-6 space-y-4 md:space-y-0">
                 <button type="submit" name="submit"
-                    class="bg-indigo-600 text-white font-medium py-2 px-6 rounded-md hover:bg-blue-600 shadow-md">
+                    class="bg-blue-600 text-white font-medium py-2 px-6 rounded-md hover:bg-blue-600 shadow-md">
                     Proses Pembayaran
                 </button>
             </div>

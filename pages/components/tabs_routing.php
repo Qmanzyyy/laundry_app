@@ -24,8 +24,6 @@ $views = [
     'tambahOutlet' => 'views/tambahOutlet.php',
     'kelolaUser' => 'views/kelolaUser.php',
     'riwayatTransaksi' => 'views/riwayatTransaksi.php',
-    'tambahProdukPaket' => 'views/tambahProdukPaket.php',
-    'tambahPaket' => 'views/tambahPaket.php',
     'kelolaProdukPaket' => 'views/kelolaProdukPaket.php',
     'kelolaPaket' => 'views/kelolaPaket.php'
 ];

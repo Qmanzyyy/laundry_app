@@ -1,9 +1,11 @@
 <?php
 $query = "
     SELECT 
-        t.id, t.tgl, p.jenis, p.jumlah, p.harga, t.deleted_at
+        t.id, t.tgl,m.nama, j.jenis_cuci, p.jumlah, p.harga, t.deleted_at
     FROM tb_transaksi t
     JOIN tb_paket p ON t.id = p.id
+    JOIN tb_jenis_cuci j ON t.id_jenis_cuci = j.id
+    JOIN tb_member m ON t.id_member = m.id
     WHERE t.deleted_at IS NULL
 ";
 
@@ -15,12 +17,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<main class=" min-h-screen">
-    <div class="container mx-auto mt-10">
-        <h1 class="text-2xl font-bold text-center mb-6">Riwayat Transaksi</h1>
-
+<main class="min-h-dvh overflow-x-auto py-6 px-6">
+    <div class="mx-auto  shadow-lg rounded-md p-4 sm:p-6 max-w-screen">
+        <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Riwayat Transaksi</h1>
+        
         <!-- Filter Tanggal -->
-        <div class="flex flex-col sm:flex-row items-end justify-center gap-6 p-6 mb-6">
+        <div class="flex flex-wrap sm:flex-nowrap items-end justify-center gap-4 sm:gap-6 p-4 sm:p-6 mb-6">
             <div class="flex flex-col w-full sm:w-auto">
                 <label for="date" class="text-sm text-gray-600 font-medium mb-2">Cetak dari tanggal</label>
                 <input type="date" name="date" id="date"
@@ -32,11 +34,11 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div class="flex flex-col w-full sm:w-auto">
                 <label for="sdate" class="text-sm text-gray-600 font-medium mb-2">Sampai tanggal</label>
                 <input type="date" name="date" id="sdate"
-                    class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                    class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
             </div>
 
             <button
-                class="self-end inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
+                class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -47,30 +49,32 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
 
         <!-- Tabel Transaksi -->
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow">
-                <thead class="bg-gray-100">
+        <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 hidden md:block">
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow text-sm">
+                <thead class="bg-gray-500 text-white">
                     <tr>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">No</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Tanggal & Waktu</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Jenis Cuci</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Jumlah</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Total Harga</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">No</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Tanggal & Waktu</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Pemesan</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Jenis Cuci</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Jumlah(kg)</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Total Harga</th>
                         <?php if ($_SESSION['user_role'] != 'kasir'):?>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Aksi</th>
+                        <th class="px-4 py-2 text-left font-semibold  whitespace-nowrap">Aksi</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1; foreach ($dataTransaksi as $row): ?>
                         <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-2 text-sm"><?= $no++ ?></td>
-                            <td class="px-4 py-2 text-sm"><?= $row['tgl'] ?></td>
-                            <td class="px-4 py-2 text-sm"><?= $row['jenis'] ?></td>
-                            <td class="px-4 py-2 text-sm"><?= $row['jumlah'] ?></td>
-                            <td class="px-4 py-2 text-sm">Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap"><?= $no++ ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap"><?= $row['tgl'] ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap"><?= $row['nama'] ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap"><?= $row['jenis_cuci'] ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap"><?= $row['jumlah'] ?></td>
+                            <td class="px-4 py-2 whitespace-nowrap">Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
                             <?php if ($_SESSION['user_role'] != 'kasir'):?>
-                            <td class="px-4 py-2 text-sm">
+                            <td class="px-4 py-2 whitespace-nowrap">
                                 <a href="#"
                                    onclick="softDelete(<?= $row['id'] ?>)"
                                    class="inline-flex items-center px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
@@ -91,6 +95,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <?php endforeach ?>
                 </tbody>
             </table>
+        </div>
+        <!-- Tabel Transaksi mobile -->
+        <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 md:hidden block">
+            <p>ini mobile</p>
         </div>
     </div>
 </main>

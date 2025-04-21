@@ -3,9 +3,9 @@
 require_once "./components/function/registerProccess.php";
 $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
 ?>
-<main class="md:p-8 px-6 pt-24">
+<main class="md:p-8 px-6 py-6">
     <div class="bg-white p-8 rounded-xl shadow-lg max-w-3xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Register Akun Karyawan</h1>
+        <h1 class="text-3xl font-bold text-blue-600 mb-6 text-center">Register Akun Karyawan</h1>
         <p class="text-gray-500 text-center mb-6 md:text-base text-sm">Silakan isi form berikut untuk mendaftarkan akun karyawan baru.</p>
     
         <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
