@@ -76,31 +76,31 @@ while ($row = mysqli_fetch_assoc($result)) {
         </tbody>
       </table>
       </div>
+      
       <!-- Mobile Card View (hanya muncul di layar kecil) -->
-<div class="md:hidden space-y-4">
-  <?php $no = 1; foreach ($dataTransaksi as $row): ?>
-    <div class="bg-white p-4 rounded-lg shadow-2xl">
-      <h2 class="text-base font-semibold text-gray-800"><?= $no++ ?>. <?= htmlspecialchars($row['jenis_cuci']) ?></h2>
-      <p class="text-gray-600 text-sm truncate">Harga: Rp<?= number_format($row['harga_cuci'], 0, ',', '.') ?></p>
-      <div class="flex justify-end gap-2 mt-4 flex-wrap">
-        <button
-          onclick="openEditJensiCuciModal(this)"
-          data-id="<?= $row['id'] ?>"
-          data-nama="<?= htmlspecialchars($row['jenis_cuci']) ?>"
-          data-alamat="<?= htmlspecialchars($row['harga_cuci']) ?>"
-          class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-blue-700 transition w-full sm:w-auto">
-          Edit
-        </button>
-        <button
-          onclick="softDelete(<?= $row['id'] ?>)"
-          class="bg-red-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-red-700 transition w-full sm:w-auto">
-          Hapus
-        </button>
+      <div class="md:hidden space-y-4">
+        <?php $no = 1; foreach ($dataTransaksi as $row): ?>
+          <div class="bg-white p-4 rounded-lg shadow-2xl">
+            <h2 class="text-base font-semibold text-gray-800"><?= $no++ ?>. <?= htmlspecialchars($row['jenis_cuci']) ?></h2>
+            <p class="text-gray-600 text-sm truncate">Harga: Rp<?= number_format($row['harga_cuci'], 0, ',', '.') ?></p>
+            <div class="flex justify-end gap-2 mt-4 flex-wrap">
+              <button
+                onclick="openEditJensiCuciModal(this)"
+                data-id="<?= $row['id'] ?>"
+                data-nama="<?= htmlspecialchars($row['jenis_cuci']) ?>"
+                data-alamat="<?= htmlspecialchars($row['harga_cuci']) ?>"
+                class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-blue-700 transition w-full sm:w-auto">
+                Edit
+              </button>
+              <button
+                onclick="softDelete(<?= $row['id'] ?>)"
+                class="bg-red-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-red-700 transition w-full sm:w-auto">
+                Hapus
+              </button>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
-    </div>
-  <?php endforeach; ?>
-</div>
-
     </div>
   </div>
 </main>

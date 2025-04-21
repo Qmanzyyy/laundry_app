@@ -19,7 +19,7 @@
 <!-- ======= favicon ======== -->
   <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 <!-- ======= koneksi css ======= -->
-  <link rel="stylesheet" href="./../style/windtata.css" />
+  <link rel="stylesheet" href="./../style/tai.css" />
 
 </head>
 <body class="min-h-dvh flex justify-center items-center bg-gray-200">
