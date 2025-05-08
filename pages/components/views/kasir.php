@@ -55,6 +55,7 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
                         <option value="P">Wanita</option>
                     </select>
                 </div>
+                
                 <div>
                     <label for="tlp" class="block mb-1 font-medium">Telepon:</label>
                     <input type="text" name="tlp" id="tlp" required pattern="\d+" maxlength="15"
@@ -100,7 +101,16 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
                         class="w-full px-4 py-2 border rounded-md" />
                 </div>
             </div>
-
+            <div class="mb-6">
+                    <label for="caraBayar" class="block mb-1 font-medium">Cara bayar</label>
+                    <select name="jeniskelamin" id="caraBayar" required
+                        class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option disabled selected>-- Cara Bayar --</option>
+                        <option value="COD">COD</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+                <div class="mb-6" id="Cash"></div>
             <!-- Tabel Desktop -->
             <div class="overflow-x-auto hidden md:block mb-6">
                 <table class="min-w-full border border-gray-300">
@@ -111,7 +121,9 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
                             <th class="border px-4 py-2 text-right">Harga per Item</th>
                             <th class="border px-4 py-2 text-center">Qty (kg)</th>
                             <th class="border px-4 py-2 text-right">Harga Paket</th>
-                            <th class="border px-4 py-2 text-right">Total</th>
+                            <th class="border px-4 py-2 text-right">Total Belanja</th>
+                            <th class="border px-4 py-2 text-right">Bayar</th>
+                            <th class="border px-4 py-2 text-right">kembalian</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,9 +137,18 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
                             </td>
                             <td class="border px-4 py-2 text-right" id="paket_price">Rp <?= number_format($harga_paket[$paket]) ?></td>
                             <td class="border px-4 py-2 text-right">
-                                <input type="text" id="total" value="Rp <?= number_format($total) ?>" readonly
-                                    class="w-full px-4 py-2 border rounded-md" />
-                            </td>
+        <input type="text" id="total" name="total" value="Rp <?= number_format($total) ?>" readonly
+        class="w-full px-4 py-2 border rounded-md" />
+</td>
+<td class="border px-4 py-2 text-right">
+    <input type="number" id="bayar" name="bayar" readonly 
+        class="w-full px-4 py-2 border rounded-md" />
+</td>
+<td class="border px-4 py-2 text-right">
+    <input type="text" id="kembalian" name="kembalian" readonly
+        class="w-full px-4 py-2 border rounded-md" />
+</td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -140,7 +161,9 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
                 <p><strong>Harga per Item:</strong> <span id="mobile_item_price">Rp <?= number_format($harga_per_item[$jenis_cuci]) ?></span></p>
                 <p><strong>Qty (kg):</strong> <span id="mobile_qty"><?= $qty ?></span></p>
                 <p><strong>Harga Paket:</strong> <span id="mobile_paket_price">Rp <?= number_format($harga_paket[$paket]) ?></span></p>
-                <p><strong>Total:</strong> <span id="mobile_total">Rp <?= number_format($total) ?></span></p>
+                <p><strong>Total Belanja:</strong> <span id="mobile_total">Rp <?= number_format($total) ?></span></p>
+                <p><strong>Dibayar:</strong> <span id="mobile_bayar">Rp <?= number_format($total) ?></span></p>
+                <p><strong>Kembalian:</strong> <span id="mobile_kembalian">Rp <?= number_format($total) ?></span></p>
             </div>
 
             <!-- Tombol Submit -->
@@ -158,13 +181,20 @@ $paket_name = ucfirst($nama_paket[$paket] ?? '');
 </main>
 
 <script>
+function cleanRupiah(rp) {
+    return parseInt(rp.replace(/[^\d]/g, '')) || 0;
+}
+
 function updateItem() {
     const jenisSelect = document.getElementById('jenis');
     const paketSelect = document.getElementById('Paket');
+    const paySelect = document.getElementById('caraBayar');
 
     const selectedJenis = jenisSelect.options[jenisSelect.selectedIndex];
     const selectedPaket = paketSelect.options[paketSelect.selectedIndex];
+    const selectedPay = paySelect.options[paySelect.selectedIndex];
 
+    const paying = selectedPay
     const hargaItem = parseInt(selectedJenis.dataset.harga || 0);
     const itemName = selectedJenis.dataset.jeniscuci || '';
     const hargaPaket = parseInt(selectedPaket.dataset.harga || 0);
@@ -197,11 +227,23 @@ function updateTotal() {
 
     const total = (hargaItem + hargaPaket) * qty;
 
+    // Update tampilan desktop & mobile
     document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
     document.getElementById('hidden_total').value = total;
     document.getElementById('mobile_total').textContent = 'Rp ' + total.toLocaleString('id-ID');
     if (window.innerWidth <= 768) {
         document.getElementById('mobile_qty').textContent = qty;
     }
+
+    // Jika input bayar sudah diisi, update juga kembalian
+    hitungKembalian();
+}
+
+function hitungKembalian() {
+    const total = cleanRupiah(document.getElementById('total').value);
+    const bayar = parseInt(document.getElementById('bayar').value) || 0;
+    const kembalian = bayar - total;
+
+    document.getElementById('kembalian').value = 'Rp ' + Math.max(kembalian, 0).toLocaleString('id-ID');
 }
 </script>

@@ -44,6 +44,15 @@ while ($row = mysqli_fetch_assoc($result)) {
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M6 9V2h12v7M6 18h12v4H6v-4zM6 14h12v2H6v-2zM6 10h12v2H6v-2z" />
         </svg>
+        tampilkan
+      </button>
+      <button
+        class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 9V2h12v7M6 18h12v4H6v-4zM6 14h12v2H6v-2zM6 10h12v2H6v-2z" />
+        </svg>
         Cetak
       </button>
     </div>

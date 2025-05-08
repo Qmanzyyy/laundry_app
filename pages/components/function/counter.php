@@ -2,7 +2,7 @@
 require_once "./../config/db.php";
 
 // Total Pegawai (Kecuali Owner)
-$pegawai = query("SELECT COUNT(*) AS total FROM tb_karyawan WHERE posisi != 'owner'");
+$pegawai = query("SELECT COUNT(*) AS total FROM tb_user WHERE role != 'owner'");
 $totalPegawai = $pegawai[0]['total'];
 
 // Role Counter
