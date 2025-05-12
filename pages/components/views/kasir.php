@@ -104,9 +104,8 @@ $paket_name = ucfirst($nama_paket[$paket] ?? 'Tidak Diketahui');
             <div class="mb-6">
                 <label for="caraBayar" class="block mb-1 font-medium">Cara Bayar</label>
                 <select name="carabayar" id="caraBayar" required class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
-                    <option disabled selected>-- Cara Bayar --</option>
                     <option value="COD">COD</option>
-                    <option value="Cash">Cash</option>
+                    <option value="CASH">Cash</option>
                 </select>
             </div>
 
@@ -138,13 +137,14 @@ $paket_name = ucfirst($nama_paket[$paket] ?? 'Tidak Diketahui');
                             </td>
                             <td class="border px-4 py-2 text-right" id="paket_price">Rp <?= number_format($harga_pkt) ?></td>
                             <td class="border px-4 py-2 text-right">
-                                <input type="text" id="total" name="total" value="Rp <?= number_format($total) ?>" readonly class="w-full px-2 py-1 border rounded-md" />
+                                <input type="text" id="total" value="Rp <?= number_format($total) ?>" readonly class="w-full px-2 py-1 border rounded-md" />
                             </td>
                             <td class="border px-4 py-2 text-right" id="bayar_td">
-                                <span id="bayar_placeholder">-</span>
+                                <span id="dekstop_bayar">Rp 0</span>
                             </td>
                             <td class="border px-4 py-2 text-right">
-                                <input type="text" id="kembalian" name="kembalian" readonly class="w-full px-2 py-1 border rounded-md" />
+                                <input type="text" id="kembalian" readonly class="w-full px-2 py-1 border rounded-md" />
+                                <input type="hidden" id="hidden_kembalian" name="kembalian" readonly class="w-full px-2 py-1 border rounded-md" />
                             </td>
                         </tr>
                     </tbody>
@@ -228,8 +228,10 @@ function hitungKembalian() {
     const kembalian = bayar - total;
 
     document.getElementById('kembalian').value = 'Rp ' + Math.max(kembalian, 0).toLocaleString('id-ID');
+    document.getElementById('hidden_kembalian').value = kembalian;
     document.getElementById('mobile_kembalian').textContent = 'Rp ' + Math.max(kembalian, 0).toLocaleString('id-ID');
     document.getElementById('mobile_bayar').textContent = 'Rp ' + bayar.toLocaleString('id-ID');
+    document.getElementById('dekstop_bayar').textContent = 'Rp ' + bayar.toLocaleString('id-ID');
 }
 
 // Tampilkan input bayar jika metode Cash
@@ -237,7 +239,7 @@ document.getElementById('caraBayar').addEventListener('change', function () {
     const metode = this.value;
     const cashDiv = document.getElementById('Cash');
 
-    if (metode === 'Cash') {
+    if (metode === 'CASH') {
         cashDiv.innerHTML = `
             <label for="bayar" class="block mb-1 font-medium">Bayar:</label>
             <input type="number" id="bayar" name="bayar" onchange="hitungKembalian()" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500" />

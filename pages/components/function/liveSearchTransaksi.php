@@ -16,56 +16,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $dataTransaksi[] = $row;
 }
 ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<main class="min-h-dvh overflow-x-auto py-6 px-6">
-  <div class="mx-auto shadow-lg rounded-md p-4 sm:p-6 max-w-screen">
-    <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Riwayat Transaksi</h1>
-
-    <!-- Filter Tanggal -->
-    <div class="flex flex-wrap sm:flex-nowrap items-end justify-center gap-4 sm:gap-6 p-4 sm:p-6 mb-6">
-      <div class="flex flex-col w-full sm:w-auto">
-        <label for="date" class="text-sm text-gray-600 font-medium mb-2">Cetak dari tanggal</label>
-        <input type="date" name="date" id="tanggal_awal"
-          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
-      </div>
-
-      <div class="hidden sm:flex items-center text-gray-400 text-xl font-semibold">→</div>
-
-      <div class="flex flex-col w-full sm:w-auto">
-        <label for="sdate" class="text-sm text-gray-600 font-medium mb-2">Sampai tanggal</label>
-        <input type="date" name="date" id="tanggal_akhir"
-          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      </div>
-
-      <button
-        id="tampilkan"
-        class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M6 9V2h12v7M6 18h12v4H6v-4zM6 14h12v2H6v-2zM6 10h12v2H6v-2z" />
-        </svg>
-        tampilkan
-      </button>
-      <form action="" method="POST" id="form-cetak">
-      <input type="hidden" name="tanggal_awal" id="tanggal_awal_input">
-      <input type="hidden" name="tanggal_akhir" id="tanggal_akhir_input">
-      <button
-        id="cetak"
-        class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M6 9V2h12v7M6 18h12v4H6v-4zM6 14h12v2H6v-2zM6 10h12v2H6v-2z" />
-        </svg>
-        Cetak
-      </button>
-      </form>
-      
-    </div>
-
-    <!-- Tabel Transaksi (Desktop) -->
-    <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 hidden md:block">
+<!-- Tabel Transaksi (Desktop) -->
+<div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 hidden md:block">
       <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow text-sm">
         <thead class="bg-gray-500 text-white">
           <tr>
@@ -153,16 +105,3 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
       <?php endforeach; ?>
     </div>
-  </div>
-</main>
-<script>
-  $(document).ready(function() {
-    $('#tampilkan').click(function() {
-      var tanggalAwal = $('#tanggal_awal').val();
-      var tanggalAkhir = $('#tanggal_akhir').val();
-
-      $('#tanggal_awal_input').val(tanggalAwal);
-      $('#tanggal_akhir_input').val(tanggalAkhir);
-    });
-  });
-</script>

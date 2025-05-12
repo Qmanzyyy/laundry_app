@@ -36,7 +36,7 @@ try {
     // Jika kedua query berhasil, commit transaksi untuk menyimpan perubahan
     $conn->commit();
     ob_clean(); // Membersihkan output buffer sebelum menampilkan hasil
-    echo "Success: Data karyawan berhasil dihapus."; // Menampilkan pesan sukses
+    echo "Success: Data Transaksi berhasil dihapus."; // Menampilkan pesan sukses
 
 } catch (Exception $e) {
     // Jika terjadi kesalahan, rollback transaksi untuk membatalkan semua perubahan
