@@ -4,6 +4,7 @@ session_start();
 // default Profile Picture
 include_once './components/function/randomProfile.php';
 
+
 // login Checker
 if (!isset($_SESSION['user_id'])) {
   // Jika belum akan redirect ke halaman login

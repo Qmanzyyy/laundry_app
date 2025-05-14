@@ -8,24 +8,49 @@ $query = "
     JOIN tb_member m ON t.id_member = m.id
     WHERE t.deleted_at IS NULL
 ";
+if (isset($_GET['date1']) && isset($_GET['date2'])) {
+    $tanggalAwal = $_GET['date1'];
+    $tanggalAkhir = $_GET['date2'];
 
+    // Validasi input tanggal
+    if (empty($tanggalAwal) || empty($tanggalAkhir)) {
+        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
+    } else {
+        // Filter berdasarkan tanggal
+        $query .= " AND t.tgl BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+    }
+}
+if(!empty($_POST['tanggal_awal']) && !empty($_POST['tanggal_akhir'])){
+    $tanggalAwal = $_POST['tanggal_awal'];
+    $tanggalAkhir = $_POST['tanggal_akhir'];
+
+    // Validasi input tanggal
+    if (empty($tanggalAwal) || empty($tanggalAkhir)) {
+        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
+    } else {
+        // Filter berdasarkan tanggal
+        $query .= " AND t.tgl BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+    }
+}
 $result = mysqli_query($conn, $query);
 
 $dataTransaksi = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $dataTransaksi[] = $row;
 }
+// var_dump($_GET);
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <main class="min-h-dvh overflow-x-auto py-6 px-6">
   <div class="mx-auto shadow-lg rounded-md p-4 sm:p-6 max-w-screen">
     <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Riwayat Transaksi</h1>
-
+<form method="GET" action="">
+  <input type="hidden" name="tab" value="riwayatTransaksi">
     <!-- Filter Tanggal -->
     <div class="flex flex-wrap sm:flex-nowrap items-end justify-center gap-4 sm:gap-6 p-4 sm:p-6 mb-6">
       <div class="flex flex-col w-full sm:w-auto">
         <label for="date" class="text-sm text-gray-600 font-medium mb-2">Cetak dari tanggal</label>
-        <input type="date" name="date" id="tanggal_awal"
+        <input type="date" name="date1" id="tanggal_awal"
           class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
       </div>
 
@@ -33,12 +58,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 
       <div class="flex flex-col w-full sm:w-auto">
         <label for="sdate" class="text-sm text-gray-600 font-medium mb-2">Sampai tanggal</label>
-        <input type="date" name="date" id="tanggal_akhir"
+        <input type="date" name="date2" id="tanggal_akhir"
           class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       </div>
 
       <button
         id="tampilkan"
+        type="submit"
         class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
@@ -47,9 +73,11 @@ while ($row = mysqli_fetch_assoc($result)) {
         </svg>
         tampilkan
       </button>
-      <form action="" method="POST" id="form-cetak">
-      <input type="hidden" name="tanggal_awal" id="tanggal_awal_input">
-      <input type="hidden" name="tanggal_akhir" id="tanggal_akhir_input">
+</form>
+      <form action="export.php">
+      <input type="hidden" name="tanggal_awal" value="<?php if(isset($_GET['date1'])){echo $_GET['date1'];}  ?>">
+      <input type="hidden" name="tanggal_akhir" value="<?php if(isset($_GET['date2'])){echo $_GET['date2'];} ?>"
+       id="tanggal_akhir_input">
       <button
         id="cetak"
         class="self-end inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition">
