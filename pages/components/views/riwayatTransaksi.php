@@ -17,7 +17,8 @@ if (isset($_GET['date1']) && isset($_GET['date2'])) {
         echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
     } else {
         // Filter berdasarkan tanggal
-        $query .= " AND t.tgl BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+        $query .= " AND t.tgl BETWEEN '$tanggalAwal 00:00:00' AND '$tanggalAkhir 23:59:59'";
+
     }
 }
 if(!empty($_POST['tanggal_awal']) && !empty($_POST['tanggal_akhir'])){
@@ -40,7 +41,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 // var_dump($_GET);
 ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <main class="min-h-dvh overflow-x-auto py-6 px-6">
   <div class="mx-auto shadow-lg rounded-md p-4 sm:p-6 max-w-screen">
     <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Riwayat Transaksi</h1>
@@ -183,14 +183,3 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
   </div>
 </main>
-<script>
-  $(document).ready(function() {
-    $('#tampilkan').click(function() {
-      var tanggalAwal = $('#tanggal_awal').val();
-      var tanggalAkhir = $('#tanggal_akhir').val();
-
-      $('#tanggal_awal_input').val(tanggalAwal);
-      $('#tanggal_akhir_input').val(tanggalAkhir);
-    });
-  });
-</script>
