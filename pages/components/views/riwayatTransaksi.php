@@ -75,8 +75,8 @@ while ($row = mysqli_fetch_assoc($result)) {
       </button>
 </form>
       <form action="export.php" method="post">
-      <input type="date" name="tanggal_awal" value="<?php if(isset($_GET['date1'])){echo $_GET['date1'];}  ?>">
-      <input type="date" name="tanggal_akhir" value="<?php if(isset($_GET['date2'])){echo $_GET['date2'];} ?>"
+      <input type="hidden" name="tanggal_awal" value="<?php if(isset($_GET['date1'])){echo $_GET['date1'];}  ?>">
+      <input type="hidden" name="tanggal_akhir" value="<?php if(isset($_GET['date2'])){echo $_GET['date2'];} ?>"
        id="tanggal_akhir_input">
       <button
         id="cetak"
