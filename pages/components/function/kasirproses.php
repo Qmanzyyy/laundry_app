@@ -173,6 +173,7 @@ if (isset($_POST['submit'])) {
         if (!mysqli_stmt_execute($stmt_detailtransaksi)) {
             throw new Exception("Gagal insert tb_detail_transaksi: " . mysqli_stmt_error($stmt_detailtransaksi));
         }
+        $id_detail_transaksi = mysqli_insert_id($conn);
         mysqli_stmt_close($stmt_detailtransaksi);
 
         mysqli_commit($conn);
@@ -183,7 +184,7 @@ if (isset($_POST['submit'])) {
                 title: 'Berhasil!',
                 text: 'Member, paket, dan transaksi berhasil ditambahkan!',
                 icon: 'success'
-            }).then(() => window.location.href = './dashboard.php?tab=kasir');
+            }).then(() => window.location.href = './components/function/printInvoice.php?success=$id_detail_transaksi');
         </script>";
 
     } catch (Exception $e) {

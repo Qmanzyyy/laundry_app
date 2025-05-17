@@ -1,6 +1,5 @@
 <?php 
 require_once "./components/function/kasirproses.php";
-
 // Ambil data dari database
 $query_jenis = mysqli_query($conn, "SELECT * FROM tb_jenis_cuci");
 $query_paket = mysqli_query($conn, "SELECT * FROM tb_paket_cuci");

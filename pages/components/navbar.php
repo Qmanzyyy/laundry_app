@@ -1,3 +1,18 @@
+<?php
+$sql = "
+    SELECT o.nama AS outlet
+    FROM tb_user u
+    JOIN tb_outlet o ON u.id_outlet = o.id
+";
+
+if (isset($_SESSION['user_outlet'])) {
+    $outlet = (int) $_SESSION['user_outlet'];
+    $sql .= " WHERE o.id = $outlet";
+}
+
+$userOutlet = query($sql); // Misal hasilnya array of rows
+$namaOutlet = isset($userOutlet[0]['outlet']) ? $userOutlet[0]['outlet'] : 'Tidak diketahui';
+?>
 <!-- NAVBAR -->
 
 <header id="navbar" class="sticky top-0 z-20 bg-white shadow-sm transition-all duration-300 ease-in-out flex items-center justify-between py-4 px-6">
@@ -19,7 +34,11 @@
   <div class="flex items-center space-x-4">
     <div class="flex flex-col">
       <span class="text-sm font-semibold"><?= $_SESSION['user_name']; ?></span>
-      <span class="text-xs text-gray-500 font-light"><?= ucfirst($_SESSION['user_role']); ?></span>
+      <div>
+        <span class="text-xs text-blue-500 font-light"><?= ucfirst($_SESSION['user_role']); ?></span>
+        <span class="text-xs text-gray-500 font-light">outlet: <?= $namaOutlet; ?></span>
+      </div>
+      
     </div>
     <!-- Foto profil jadi tombol untuk buka modal -->
     <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">

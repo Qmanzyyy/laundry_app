@@ -1,48 +1,72 @@
 <?php
+$role = $_SESSION['user_role'];
+$id_outlet = $_SESSION['user_outlet'];
+
 $query = "
     SELECT 
-        t.id, t.tgl,m.nama, j.jenis_cuci, p.jumlah, p.harga, t.deleted_at
+        t.id, t.tgl, m.nama, t.id_user, j.jenis_cuci, p.jumlah, p.harga, t.deleted_at, u.id_outlet
     FROM tb_transaksi t
     JOIN tb_paket p ON t.id = p.id
     JOIN tb_jenis_cuci j ON t.id_jenis_cuci = j.id
     JOIN tb_member m ON t.id_member = m.id
+    JOIN tb_user u ON t.id_user = u.id
     WHERE t.deleted_at IS NULL
 ";
+
+// Jika bukan admin atau owner, batasi berdasarkan outlet
+if ($role != 'admin' && $role != 'owner') {
+    $query .= " AND u.id_outlet = $id_outlet";
+}
+
+// Filter berdasarkan GET (tanggal dan outlet)
 if (isset($_GET['date1']) && isset($_GET['date2'])) {
     $tanggalAwal = $_GET['date1'];
     $tanggalAkhir = $_GET['date2'];
 
-    // Validasi input tanggal
-    if (empty($tanggalAwal) || empty($tanggalAkhir)) {
-        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
-    } else {
-        // Filter berdasarkan tanggal
+    if (!empty($tanggalAwal) && !empty($tanggalAkhir)) {
         $query .= " AND t.tgl BETWEEN '$tanggalAwal 00:00:00' AND '$tanggalAkhir 23:59:59'";
+    } else {
+        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
+    }
 
+    // Filter berdasarkan outlet jika ada
+    if (isset($_GET['outlet']) && !empty($_GET['outlet'])) {
+        $id_outlet = $_GET['outlet'];
+        $query .= " AND u.id_outlet = $id_outlet";
     }
 }
-if(!empty($_POST['tanggal_awal']) && !empty($_POST['tanggal_akhir'])){
+// Filter berdasarkan outlet jika ada
+    if (isset($_GET['outlet']) && !empty($_GET['outlet'])) {
+        $id_outlet = $_GET['outlet'];
+        $query .= " AND u.id_outlet = $id_outlet";
+    }
+// Filter berdasarkan POST (tanggal)
+if (!empty($_POST['tanggal_awal']) && !empty($_POST['tanggal_akhir'])) {
     $tanggalAwal = $_POST['tanggal_awal'];
     $tanggalAkhir = $_POST['tanggal_akhir'];
 
-    // Validasi input tanggal
-    if (empty($tanggalAwal) || empty($tanggalAkhir)) {
-        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
-    } else {
-        // Filter berdasarkan tanggal
+    if (!empty($tanggalAwal) && !empty($tanggalAkhir)) {
         $query .= " AND t.tgl BETWEEN '$tanggalAwal' AND '$tanggalAkhir'";
+    } else {
+        echo "<script>alert('Tanggal tidak boleh kosong!');</script>";
     }
 }
+
+// Jalankan query
 $result = mysqli_query($conn, $query);
 
+// Ambil data hasil
 $dataTransaksi = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $dataTransaksi[] = $row;
 }
-// var_dump($_GET);
+
+// Ambil data outlet untuk dropdown/filter
+$outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
 ?>
+
 <main class="min-h-dvh overflow-x-auto py-6 px-6">
-  <div class="mx-auto shadow-lg rounded-md p-4 sm:p-6 max-w-screen">
+  <div class="mx-auto rounded-md p-4 sm:p-6 max-w-screen">
     <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Riwayat Transaksi</h1>
 <form method="GET" action="">
   <input type="hidden" name="tab" value="riwayatTransaksi">
@@ -61,7 +85,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <input type="date" name="date2" id="tanggal_akhir"
           class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       </div>
-
+      <?php if(isset($_GET['outlet'])):?><input type="hidden" name="outlet" value="<?php if (!empty($_GET['outlet'])){echo $_GET['outlet'];}?>"><?php endif;?>
       <button
         id="tampilkan"
         type="submit"
@@ -89,7 +113,20 @@ while ($row = mysqli_fetch_assoc($result)) {
         Cetak
       </button>
       </form>
-      
+      <!-- Outlet -->
+       <?php if ($_SESSION['user_role'] != "kasir"):?>
+      <form action="" method="get">
+        <input type="hidden" name="tab" value="riwayatTransaksi">
+        <?php if (isset($_GET['date1'])):?><input type="hidden" name="date1" value="<?php if (isset($_GET['date1'])) {echo $_GET['date1'];}?>"><?php endif;?>
+        <?php if (isset($_GET['date2'])):?><input type="hidden" name="date2" value="<?php if (isset($_GET['date2'])) {echo $_GET['date2'];}?>"><?php endif;?>
+        <select name="outlet" id="" onchange="this.form.submit()">
+          <option value="">Pilih Outlet</option>
+          <?php foreach ($outlet as $ot) :?>
+            <option value="<?= $ot['id'] ?>"><?= $ot['nama'] ?></option>
+          <?php endforeach;?>
+        </select>
+      </form>
+      <?php endif;?>
     </div>
 
     <!-- Tabel Transaksi (Desktop) -->
@@ -103,9 +140,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <th class="px-4 py-2 text-left font-semibold whitespace-nowrap">Jenis Cuci</th>
             <th class="px-4 py-2 text-left font-semibold whitespace-nowrap">Jumlah(kg)</th>
             <th class="px-4 py-2 text-left font-semibold whitespace-nowrap">Total Harga</th>
-            <?php if ($_SESSION['user_role'] != 'kasir'): ?>
               <th class="px-4 py-2 text-center font-semibold whitespace-nowrap">Aksi</th>
-            <?php endif; ?>
           </tr>
         </thead>
         <tbody>
@@ -117,8 +152,9 @@ while ($row = mysqli_fetch_assoc($result)) {
               <td class="px-4 py-2 whitespace-nowrap"><?= $row['jenis_cuci'] ?></td>
               <td class="px-4 py-2 whitespace-nowrap"><?= $row['jumlah'] ?></td>
               <td class="px-4 py-2 whitespace-nowrap">Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
-              <?php if ($_SESSION['user_role'] != 'kasir'): ?>
+              
                 <td class="px-4 py-2 whitespace-nowrap text-center">
+                  
                   <a href="#"
                     onclick="softDelete(<?= $row['id'] ?>)"
                     class="inline-flex items-center px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-red-600 transition">
@@ -129,6 +165,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                      </svg>
                     cetak
                   </a>
+ 
+                  <?php if ($_SESSION['user_role'] != 'kasir'): ?>
                   <a href="#"
                     onclick="softDelete(<?= $row['id'] ?>)"
                     class="inline-flex items-center px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition">
@@ -143,8 +181,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </svg>
                     Hapus
                   </a>
+                  <?php endif; ?>
                 </td>
-              <?php endif; ?>
+              
             </tr>
           <?php endforeach ?>
         </tbody>
