@@ -98,7 +98,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
         tampilkan
       </button>
 </form>
-      <form action="export.php" method="post">
+      <form action="export.php?outlet=<?php if(isset($_GET['outlet'])){echo $_GET['outlet'];} ?>" method="post">
       <input type="hidden" name="tanggal_awal" value="<?php if(isset($_GET['date1'])){echo $_GET['date1'];}  ?>">
       <input type="hidden" name="tanggal_akhir" value="<?php if(isset($_GET['date2'])){echo $_GET['date2'];} ?>"
        id="tanggal_akhir_input">
@@ -119,12 +119,30 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
         <input type="hidden" name="tab" value="riwayatTransaksi">
         <?php if (isset($_GET['date1'])):?><input type="hidden" name="date1" value="<?php if (isset($_GET['date1'])) {echo $_GET['date1'];}?>"><?php endif;?>
         <?php if (isset($_GET['date2'])):?><input type="hidden" name="date2" value="<?php if (isset($_GET['date2'])) {echo $_GET['date2'];}?>"><?php endif;?>
-        <select name="outlet" id="" onchange="this.form.submit()">
-          <option value="">Pilih Outlet</option>
-          <?php foreach ($outlet as $ot) :?>
-            <option value="<?= $ot['id'] ?>"><?= $ot['nama'] ?></option>
-          <?php endforeach;?>
-        </select>
+          <div class="flex flex-col">
+  <label for="outlet" class="text-sm text-gray-600 font-medium mb-2">Pilih Outlet</label>
+  <select name="outlet" id="outlet" onchange="this.form.submit()" class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+    <option disabled selected hidden>
+      <?php
+        if (isset($_GET['outlet'])) {
+          echo empty($_GET['outlet']) ? 'Semua Outlet' : htmlspecialchars($_GET['outlet']);
+        } else {
+          echo 'Pilih Outlet';
+        }
+      ?>
+    </option>
+
+    <!-- Opsi untuk menampilkan semua -->
+    <option value="">Tampilkan Semua</option>
+    <!-- Daftar outlet -->
+    <?php foreach ($outlet as $ot) : ?>
+      <option value="<?= $ot['id'] ?>" <?= (isset($_GET['outlet']) && $_GET['outlet'] == $ot['id']) ? 'selected' : '' ?>>
+        <?= $ot['nama'] ?>
+      </option>
+    <?php endforeach; ?>
+
+  </select>
+</div>
       </form>
       <?php endif;?>
     </div>
@@ -155,8 +173,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
               
                 <td class="px-4 py-2 whitespace-nowrap text-center">
                   
-                  <a href="#"
-                    onclick="softDelete(<?= $row['id'] ?>)"
+                  <a href="./components/function/printInvoice.php?success=<?= $row['id'] ?>"
                     class="inline-flex items-center px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-red-600 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">

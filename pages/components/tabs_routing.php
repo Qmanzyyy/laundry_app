@@ -4,7 +4,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'home';
 
 // Daftar tab yang dilarang untuk kasir
 $kasir_dilarang = ['admin', 'kelolaUser', 'registrasiAkun', 'tambahOutlet', 'tambahProdukPaket'];
-$owner_dilarang = ['admin', 'tambahOutlet', 'tambahProdukPaket'];
+$owner_dilarang = ['tambahOutlet', 'tambahProdukPaket'];
 // Cek role terlebih dahulu
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'kasir' && in_array($tab, $kasir_dilarang)) {
     include_once 'views/access_denied.php';

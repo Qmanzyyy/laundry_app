@@ -8,19 +8,22 @@ const connection = mysql.createConnection({
   database: 'laundry',
 });
 
-// Tabel yang mau dikosongkan
 const tables = ['tb_user', 'tb_karyawan'];
 
-// Fungsi utama
 const truncateTables = () => {
   connection.query('SET FOREIGN_KEY_CHECKS = 0;', (err) => {
-    if (err) return console.error('Gagal disable FK:', err);
+    if (err) {
+      console.error('Gagal disable FK:', err);
+      return connection.end();
+    }
 
-    // Truncate semua tabel
     let done = 0;
     tables.forEach((table) => {
       connection.query(`TRUNCATE TABLE ${table}`, (err) => {
-        if (err) return console.error(`Gagal truncate ${table}:`, err);
+        if (err) {
+          console.error(`Gagal truncate ${table}:`, err);
+          return connection.end();
+        }
         console.log(`Berhasil truncate ${table}`);
         done++;
         if (done === tables.length) insertUser();
@@ -29,35 +32,48 @@ const truncateTables = () => {
   });
 };
 
-// Insert ke tb_user
 const insertUser = () => {
-  connection.query(
-    `INSERT INTO tb_user (nama, foto, username,password,id_outlet,role)
-     VALUES ('Miftahur Rahman', '', 'miftahur', '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm',1,'admin')`,
-    (err, result) => {
-      if (err) return console.error('Gagal insert tb_user:', err);
-      console.log('Berhasil insert tb_user');
-      const idUser = result.insertId;
-      insertKaryawan(idUser);
+  const sql = `
+    INSERT INTO tb_user (nama, foto, username, password, id_outlet, role) VALUES ?
+  `;
+
+  const values = [
+    ['Miftahur Rahman', '', 'miftahur', '$2a$10$SsfvYib4yKtcBtNBPpNucO77FRsxXpuibhHGTNXfBJ4xwnFAmqFcm', 1, 'admin'],
+    ['Riezky Chahya Saputra', '', 'riezky', '$2a$10$QjhCVpmYHzU0eQWqoBq6Ju14uk04ggD6lf37CWWhfxgf/Uiw/J.qW', 1, 'owner']
+  ];
+
+  connection.query(sql, [values], (err, result) => {
+    if (err) {
+      console.error('Gagal insert tb_user:', err);
+      return connection.end();
     }
-  );
+    console.log('Berhasil insert tb_user:', result.affectedRows, 'baris');
+
+    const idUserPertama = result.insertId;
+    insertKaryawan(idUserPertama);
+  });
 };
 
-// Insert ke tb_karyawan
-const insertKaryawan = (idUser) => {
-  connection.query(
-    `INSERT INTO tb_karyawan (nama, alamat, no_telp, posisi, id_user, gaji, shift_kerja)
-     VALUES ('Miftahur Rahman', 'Dsn Pajaten Mas, Ds Bantarjati, Kec Kertajati', '081234567890', 'admin', ?, null, 'pagi')`,
-    [idUser],
-    (err) => {
-      if (err) return console.error('Gagal insert tb_karyawan:', err);
-      console.log('Berhasil insert tb_karyawan');
-      enableFK();
+const insertKaryawan = (firstUserId) => {
+  const karyawanValues = [
+    ['Miftahur Rahman', 'Dsn Pajaten Mas, Ds Bantarjati, Kec Kertajati', '081234567890', 'admin', firstUserId, null, 'pagi'],
+    ['Riezky Chahya Saputra', 'Jl. Mawar No. 5', '081234567891', 'kasir', firstUserId + 1, null, 'malam']
+  ];
+
+  const sql = `
+    INSERT INTO tb_karyawan (nama, alamat, no_telp, posisi, id_user, gaji, shift_kerja) VALUES ?
+  `;
+
+  connection.query(sql, [karyawanValues], (err) => {
+    if (err) {
+      console.error('Gagal insert tb_karyawan:', err);
+      return connection.end();
     }
-  );
+    console.log('Berhasil insert tb_karyawan');
+    enableFK();
+  });
 };
 
-// Aktifkan kembali foreign key
 const enableFK = () => {
   connection.query('SET FOREIGN_KEY_CHECKS = 1;', (err) => {
     if (err) console.error('Gagal enable FK:', err);

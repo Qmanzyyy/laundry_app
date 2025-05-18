@@ -118,7 +118,22 @@ function rupiah($angka) {
 #z{
     z-index: 1;
 }
+.center {
+  text-align: center;
+  vertical-align: middle;
+}
 
+.no-border {
+  border: none;
+  color: #555;
+}
+.border-s{
+  border-right: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+}
+.border-b{
+  border-bottom: 1px solid #aaa;
+}
   </style>
 </head>
 <body onload="window.print()">
@@ -151,32 +166,32 @@ function rupiah($angka) {
       <thead>
         <tr>
           <th>Jenis&Paket Cuci</th>
+          <th>Harga</th>
           <th>Jumlah(kg)</th>
-          <th>Harga Cuci</th>
-          <th>Harga Paket</th>
-          <th>Total Harga</th>
+          <th>Total Cuci</th>
           <?php if($data['cara_bayar'] == 'CASH'):?>
           <th>Uang Tunai</th>
           <th>kembalian</th>
           <?php endif;?>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Jenis: <?= $data['jenis_cuci'] ?> | Paket: <?= $data['paket_cuci'] ?>
-          
-          </td>
-          <td><?= $data['qty'] ?>
-          </td>
-          <td class="right"><?= rupiah($data['harga_cuci']) ?></td>
-          <td class="right"><?= rupiah($data['harga_paket']) ?></td>
-          <td class="right"><?= rupiah($sum) ?></td>
-          <?php if($data['cara_bayar'] == 'CASH'):?>
-            <td class="right"><?= rupiah($data['uang']) ?></td>
-            <td class="right"><?= rupiah($data['kembalian']) ?></td>
-          <?php endif;?>            
-        </tr>
-      </tbody>
+ <tbody>
+  <tr>
+    <td class="center">Jenis: <?= $data['jenis_cuci'] ?></td>
+    <td class="right"><?= rupiah($data['harga_cuci']) ?></td>
+    <td class="center no-border border-s border-b" rowspan="2"><?= $data['qty'] ?></td>
+    <td class="center no-border border-s border-b" rowspan="2"><?= rupiah($sum) ?></td>
+    <?php if($data['cara_bayar'] == 'CASH'):?>
+      <td  class="center no-border border-s border-b" rowspan="2"><?= rupiah($data['uang']) ?></td>
+      <td  class="center no-border border-s border-b" rowspan="2"><?= rupiah($data['kembalian']) ?></td>
+    <?php endif;?>            
+  </tr>
+  <tr>
+    <td class="center">Paket: <?= $data['paket_cuci'] ?></td>
+    <td class="right"><?= rupiah($data['harga_paket']) ?></td>        
+  </tr>
+</tbody>
+
     </table>
   </div>
 
@@ -195,6 +210,7 @@ function rupiah($angka) {
   </div>
 
   <button class="no-print" onclick="window.print()">Cetak Ulang</button>
+  <button class="no-print" onclick="window.location.href='../../dashboard.php?tab=kasir'">kembali</button>
 </main>
 </body>
 </html>
