@@ -1,6 +1,7 @@
 <?php
 require_once "./../config/db.php";
-
+// var_dump($_POST);
+// exit;
 if (isset($_POST['submit'])) {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
