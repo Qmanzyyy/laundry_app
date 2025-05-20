@@ -75,7 +75,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
       <div class="flex flex-col w-full sm:w-auto">
         <label for="date" class="text-sm text-gray-600 font-medium mb-2">Cetak dari tanggal</label>
         <input type="date" name="date1" id="tanggal_awal"
-          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" value="<?php if(isset($_GET['date1'])){echo $_GET['date1'];}?>">
       </div>
 
       <div class="hidden sm:flex items-center text-gray-400 text-xl font-semibold">→</div>
@@ -83,7 +83,7 @@ $outlet = query("SELECT * FROM tb_outlet ORDER BY nama ASC");
       <div class="flex flex-col w-full sm:w-auto">
         <label for="sdate" class="text-sm text-gray-600 font-medium mb-2">Sampai tanggal</label>
         <input type="date" name="date2" id="tanggal_akhir"
-          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+          class="w-full sm:w-56 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"  value="<?php if(isset($_GET['date2'])){echo $_GET['date2'];}?>">
       </div>
       <?php if(isset($_GET['outlet'])):?><input type="hidden" name="outlet" value="<?php if (!empty($_GET['outlet'])){echo $_GET['outlet'];}?>"><?php endif;?>
       <button

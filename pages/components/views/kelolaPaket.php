@@ -1,12 +1,10 @@
 <?php
 require_once "./components/function/editJenisCuci.php";
 require_once "./components/function/ubahTambahProdukProccess.php";
-
 // Query untuk mengambil semua data paket cuci
 $query = "
 SELECT * FROM tb_paket_cuci
 ";
-
 $result = mysqli_query($conn, $query);
 
 $dataTransaksi = [];
@@ -14,7 +12,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $dataTransaksi[] = $row;
 }
 ?>
-
 <main class="p-6 min-h-dvh">
   <div class="max-w-5xl mx-auto p-6">
     <h1 class="md:text-3xl text-xl font-bold text-center text-blue-600 mb-10">Kelola Paket</h1>
