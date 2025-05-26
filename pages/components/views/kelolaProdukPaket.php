@@ -54,20 +54,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </svg>
                     <span>Edit</span>
                   </button>
-                  <button
-                    onclick="softDelete(<?= $row['id'] ?>)"
-                    class="flex items-center justify-center gap-2 px-2 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md w-full sm:basis-1/2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path fill-rule="evenodd"
-                        d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0
-                        2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2
-                        2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1
-                        0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1
-                        0-2 0v8a1 1 0 1 0 2 0v-8Z"
-                        clip-rule="evenodd"/>
-                    </svg>
-                    <span>Hapus</span>
-                  </button>
                 </div>
 
               </td>
@@ -91,11 +77,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                 data-alamat="<?= htmlspecialchars($row['harga_cuci']) ?>"
                 class="bg-blue-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-blue-700 transition w-full sm:w-auto">
                 Edit
-              </button>
-              <button
-                onclick="softDelete(<?= $row['id'] ?>)"
-                class="bg-red-600 text-white px-3 py-2 rounded-lg text-xs shadow-md hover:bg-red-700 transition w-full sm:w-auto">
-                Hapus
               </button>
             </div>
           </div>
